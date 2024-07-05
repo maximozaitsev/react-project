@@ -15,8 +15,9 @@ const Search: React.FC<SearchProps> = ({ onSearch }) => {
   }, []);
 
   const handleSearch = () => {
-    localStorage.setItem('searchTerm', term);
-    onSearch(term);
+    const trimmedTerm = term.trim();
+    localStorage.setItem('searchTerm', trimmedTerm);
+    onSearch(trimmedTerm);
   };
 
   return (

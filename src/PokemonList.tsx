@@ -45,13 +45,16 @@ class PokemonList extends Component<Props, State> {
     const { offset, limit } = this.state;
     this.setState({ loading: true, error: null });
     try {
-      const response = await axios.get(
-        `https://pokeapi.co/api/v2/pokemon?offset=${offset}&limit=${limit}`
+      const url = searchTerm
+        ? `https://pokeapi.co/api/v2/pokemon?offset=${offset}&limit=${limit}&name=${searchTerm}`
+        : `https://pokeapi.co/api/v2/pokemon?offset=${offset}&limit=${limit}`;
+
+      const response = await axios.get(url);
+      const pokemons = response.data.results.filter((pokemon: Pokemon) =>
+        pokemon.name.includes(searchTerm.toLowerCase())
       );
-      const filteredPokemons = response.data.results.filter(
-        (pokemon: Pokemon) => pokemon.name.includes(searchTerm.toLowerCase())
-      );
-      this.setState({ pokemons: filteredPokemons, loading: false });
+
+      this.setState({ pokemons, loading: false });
     } catch (error: unknown) {
       if (error instanceof Error) {
         this.setState({ error: error.message, loading: false });
