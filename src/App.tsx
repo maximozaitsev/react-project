@@ -1,25 +1,41 @@
-import React, { useState } from 'react';
+import React, { Component } from 'react';
 import Search from './Search';
 import PokemonList from './PokemonList';
 
-const App: React.FC = () => {
-  const [searchTerm, setSearchTerm] = useState('');
+interface State {
+  searchTerm: string;
+}
 
-  const handleSearch = (term: string) => {
-    setSearchTerm(term);
+class App extends Component<Record<string, never>, State> {
+  constructor(props: Record<string, never>) {
+    super(props);
+    this.state = {
+      searchTerm: '',
+    };
+  }
+
+  handleSearch = (term: string) => {
+    this.setState({ searchTerm: term });
   };
 
-  return (
-    <div className="App">
-      <h1>My Pokemon App</h1>
-      <div className="top-section">
-        <Search onSearch={handleSearch} />
+  throwError = () => {
+    throw new Error('Test error');
+  };
+
+  render() {
+    return (
+      <div className="App">
+        <h1>My Pokemon App</h1>
+        <div className="top-section">
+          <Search onSearch={this.handleSearch} />
+        </div>
+        <div className="bottom-section">
+          <PokemonList searchTerm={this.state.searchTerm} />
+        </div>
+        <button onClick={this.throwError}>Throw Error</button>
       </div>
-      <div className="bottom-section">
-        <PokemonList searchTerm={searchTerm} />
-      </div>
-    </div>
-  );
-};
+    );
+  }
+}
 
 export default App;
