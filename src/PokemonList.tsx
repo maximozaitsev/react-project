@@ -3,6 +3,7 @@ import axios from 'axios';
 
 interface Pokemon {
   name: string;
+  url: string;
 }
 
 interface State {
@@ -13,8 +14,12 @@ interface State {
   limit: number;
 }
 
-class PokemonList extends Component<Record<string, never>, State> {
-  constructor(props: Record<string, never>) {
+interface Props {
+  searchTerm: string;
+}
+
+class PokemonList extends Component<Props, State> {
+  constructor(props: Props) {
     super(props);
     this.state = {
       pokemons: [],
@@ -29,14 +34,24 @@ class PokemonList extends Component<Record<string, never>, State> {
     this.fetchPokemons();
   }
 
+  componentDidUpdate(prevProps: Props) {
+    if (prevProps.searchTerm !== this.props.searchTerm) {
+      this.fetchPokemons();
+    }
+  }
+
   fetchPokemons = async () => {
+    const { searchTerm } = this.props;
     const { offset, limit } = this.state;
     this.setState({ loading: true, error: null });
     try {
       const response = await axios.get(
         `https://pokeapi.co/api/v2/pokemon?offset=${offset}&limit=${limit}`
       );
-      this.setState({ pokemons: response.data.results, loading: false });
+      const filteredPokemons = response.data.results.filter(
+        (pokemon: Pokemon) => pokemon.name.includes(searchTerm.toLowerCase())
+      );
+      this.setState({ pokemons: filteredPokemons, loading: false });
     } catch (error: unknown) {
       if (error instanceof Error) {
         this.setState({ error: error.message, loading: false });
@@ -50,12 +65,14 @@ class PokemonList extends Component<Record<string, never>, State> {
     const { pokemons, loading, error } = this.state;
     return (
       <div>
-        <h1>Pokemon List</h1>
         {loading && <p>Loading...</p>}
         {error && <p>{error}</p>}
         <ul>
           {pokemons.map((pokemon: Pokemon) => (
-            <li key={pokemon.name}>{pokemon.name}</li>
+            <li key={pokemon.name}>
+              {pokemon.name}
+              {/* Можно добавить описание, если оно доступно */}
+            </li>
           ))}
         </ul>
       </div>

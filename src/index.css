@@ -1,0 +1,20 @@
+/* index.css */
+.App {
+  text-align: center;
+}
+
+.top-section {
+  height: 20%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.bottom-section {
+  height: 80%;
+  overflow-y: scroll;
+}
+
+li {
+  list-style-type: none;
+}
