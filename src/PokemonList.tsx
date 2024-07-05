@@ -38,8 +38,12 @@ class PokemonList extends Component<Record<string, never>, State> {
         `https://pokeapi.co/api/v2/pokemon?offset=${offset}&limit=${limit}`
       );
       this.setState({ pokemons: response.data.results, loading: false });
-    } catch (error) {
-      this.setState({ error: error.message, loading: false });
+    } catch (error: unknown) {
+      if (error instanceof Error) {
+        this.setState({ error: error.message, loading: false });
+      } else {
+        this.setState({ error: String(error), loading: false });
+      }
     }
   };
 
@@ -51,13 +55,9 @@ class PokemonList extends Component<Record<string, never>, State> {
         {loading && <p>Loading...</p>}
         {error && <p>{error}</p>}
         <ul>
-          {pokemons.map(
-            (
-              pokemon: Pokemon // Обратите внимание на использование типа Pokemon здесь
-            ) => (
-              <li key={pokemon.name}>{pokemon.name}</li>
-            )
-          )}
+          {pokemons.map((pokemon: Pokemon) => (
+            <li key={pokemon.name}>{pokemon.name}</li>
+          ))}
         </ul>
       </div>
     );
