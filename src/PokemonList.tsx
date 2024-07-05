@@ -72,10 +72,7 @@ class PokemonList extends Component<Props, State> {
         {error && <p>{error}</p>}
         <ul>
           {pokemons.map((pokemon: Pokemon) => (
-            <li key={pokemon.name}>
-              {pokemon.name}
-              {/* Можно добавить описание, если оно доступно */}
-            </li>
+            <li key={pokemon.name}>{pokemon.name}</li>
           ))}
         </ul>
       </div>

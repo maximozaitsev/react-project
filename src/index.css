@@ -4,15 +4,28 @@
 }
 
 .top-section {
-  height: 20%;
-  display: flex;
-  align-items: center;
-  justify-content: center;
+  padding: 20px;
 }
 
 .bottom-section {
-  height: 80%;
-  overflow-y: scroll;
+  padding: 20px;
+}
+
+.search {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.search input {
+  padding: 8px;
+  font-size: 16px;
+}
+
+.search button {
+  padding: 8px 16px;
+  font-size: 16px;
+  margin-left: 8px;
 }
 
 li {
