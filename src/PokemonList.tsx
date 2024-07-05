@@ -3,7 +3,6 @@ import axios from 'axios';
 
 interface Pokemon {
   name: string;
-  // Дополнительные поля, которые могут вернуться от API
 }
 
 interface State {
