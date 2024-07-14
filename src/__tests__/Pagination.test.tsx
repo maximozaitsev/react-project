@@ -1,9 +1,19 @@
+import React from 'react';
 import { render, screen, fireEvent, waitFor } from '@testing-library/react';
 import '@testing-library/jest-dom';
-import { MemoryRouter, Route, Routes } from 'react-router-dom';
+import { MemoryRouter, Route, Routes, useNavigate } from 'react-router-dom';
 import Pagination from '../components/Pagination';
 
+// Mock useNavigate hook
+jest.mock('react-router-dom', () => ({
+  ...jest.requireActual('react-router-dom'),
+  useNavigate: jest.fn(),
+}));
+
 test('updates URL query parameter when page changes', async () => {
+  const mockNavigate = jest.fn();
+  (useNavigate as jest.Mock).mockReturnValue(mockNavigate);
+
   render(
     <MemoryRouter initialEntries={['/main?page=1']}>
       <Routes>
@@ -19,6 +29,6 @@ test('updates URL query parameter when page changes', async () => {
   fireEvent.click(nextButton);
 
   await waitFor(() => {
-    expect(window.location.search).toBe('?page=2');
+    expect(mockNavigate).toHaveBeenCalledWith({ search: 'page=2' });
   });
 });

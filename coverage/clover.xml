@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<coverage generated="1720975810501" clover="3.2.0">
-  <project timestamp="1720975810501" name="All files">
-    <metrics statements="79" coveredstatements="65" conditionals="14" coveredconditionals="11" methods="24" coveredmethods="17" elements="117" coveredelements="93" complexity="0" loc="79" ncloc="79" packages="3" files="6" classes="6"/>
+<coverage generated="1720976108344" clover="3.2.0">
+  <project timestamp="1720976108344" name="All files">
+    <metrics statements="79" coveredstatements="69" conditionals="14" coveredconditionals="11" methods="24" coveredmethods="19" elements="117" coveredelements="99" complexity="0" loc="79" ncloc="79" packages="3" files="6" classes="6"/>
     <package name="src">
       <metrics statements="27" coveredstatements="27" conditionals="2" coveredconditionals="2" methods="9" coveredmethods="8"/>
       <file name="PokemonList.tsx" path="/Users/maximozaitsev/Code/git repositories/react-project/src/PokemonList.tsx">
@@ -39,7 +39,7 @@
       </file>
     </package>
     <package name="src.components">
-      <metrics statements="45" coveredstatements="31" conditionals="10" coveredconditionals="7" methods="11" coveredmethods="5"/>
+      <metrics statements="45" coveredstatements="35" conditionals="10" coveredconditionals="7" methods="11" coveredmethods="7"/>
       <file name="Home.tsx" path="/Users/maximozaitsev/Code/git repositories/react-project/src/components/Home.tsx">
         <metrics statements="18" coveredstatements="11" conditionals="6" coveredconditionals="4" methods="4" coveredmethods="1"/>
         <line num="8" count="1" type="stmt"/>
@@ -62,17 +62,17 @@
         <line num="33" count="1" type="stmt"/>
       </file>
       <file name="Pagination.tsx" path="/Users/maximozaitsev/Code/git repositories/react-project/src/components/Pagination.tsx">
-        <metrics statements="10" coveredstatements="5" conditionals="0" coveredconditionals="0" methods="4" coveredmethods="1"/>
+        <metrics statements="10" coveredstatements="9" conditionals="0" coveredconditionals="0" methods="4" coveredmethods="3"/>
+        <line num="9" count="2" type="stmt"/>
         <line num="10" count="2" type="stmt"/>
-        <line num="11" count="1" type="stmt"/>
-        <line num="12" count="1" type="stmt"/>
+        <line num="11" count="2" type="stmt"/>
+        <line num="13" count="2" type="stmt"/>
         <line num="14" count="1" type="stmt"/>
-        <line num="15" count="0" type="stmt"/>
-        <line num="16" count="0" type="stmt"/>
-        <line num="17" count="0" type="stmt"/>
-        <line num="20" count="1" type="stmt"/>
-        <line num="24" count="0" type="stmt"/>
-        <line num="33" count="0" type="stmt"/>
+        <line num="15" count="1" type="stmt"/>
+        <line num="16" count="1" type="stmt"/>
+        <line num="19" count="2" type="stmt"/>
+        <line num="23" count="0" type="stmt"/>
+        <line num="32" count="1" type="stmt"/>
       </file>
       <file name="PokemonDetails.tsx" path="/Users/maximozaitsev/Code/git repositories/react-project/src/components/PokemonDetails.tsx">
         <metrics statements="17" coveredstatements="15" conditionals="4" coveredconditionals="3" methods="3" coveredmethods="3"/>
