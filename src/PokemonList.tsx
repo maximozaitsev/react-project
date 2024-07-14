@@ -10,7 +10,7 @@ interface Props {
   searchTerm: string;
 }
 
-const PokemonList: React.FC<Props> = ({ searchTerm }) => {
+const usePokemonList = (searchTerm: string) => {
   const [pokemons, setPokemons] = useState<Pokemon[]>([]);
   const [loading, setLoading] = useState<boolean>(false);
   const [error, setError] = useState<string | null>(null);
@@ -40,11 +40,17 @@ const PokemonList: React.FC<Props> = ({ searchTerm }) => {
       }
       setLoading(false);
     }
-  }, [searchTerm, offset, limit]);
+  }, [searchTerm]);
 
   useEffect(() => {
     fetchPokemons();
   }, [fetchPokemons]);
+
+  return { pokemons, loading, error };
+};
+
+const PokemonList: React.FC<Props> = ({ searchTerm }) => {
+  const { pokemons, loading, error } = usePokemonList(searchTerm);
 
   return (
     <div>
