@@ -1,6 +1,5 @@
-// src/__tests__/Home.test.tsx
-import React from 'react';
 import { render, screen } from '@testing-library/react';
+import '@testing-library/jest-dom';
 import Home from '../components/Home';
 
 test('renders My Pokemon App title', () => {

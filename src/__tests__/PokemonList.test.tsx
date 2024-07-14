@@ -1,11 +1,9 @@
-// src/__tests__/PokemonList.test.tsx
-import React from 'react';
 import { render, screen, waitFor } from '@testing-library/react';
+import '@testing-library/jest-dom';
 import axios from 'axios';
-import PokemonList from '../PokemonList';
+import PokemonList from '..//PokemonList';
 
 jest.mock('axios');
-
 const mockedAxios = axios as jest.Mocked<typeof axios>;
 
 test('renders pokemon list', async () => {
@@ -17,7 +15,9 @@ test('renders pokemon list', async () => {
     },
   });
 
-  render(<PokemonList searchTerm="" />);
+  render(
+    <PokemonList searchTerm="" currentPage={1} onPokemonClick={() => {}} />
+  );
 
   await waitFor(() => {
     const pokemonElement = screen.getByText(/pikachu/i);
