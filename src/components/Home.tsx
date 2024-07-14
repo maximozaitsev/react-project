@@ -46,11 +46,13 @@ const Home: React.FC = () => {
             onPokemonClick={handlePokemonClick}
           />
           <Pagination currentPage={currentPage} totalPages={10} />
-          {/* Adjust totalPages as needed */}
         </div>
         {selectedPokemon && (
           <div className="right-section">
-            <PokemonDetails onClose={handleCloseDetails} />
+            <PokemonDetails
+              name={selectedPokemon}
+              onClose={handleCloseDetails}
+            />
           </div>
         )}
       </div>

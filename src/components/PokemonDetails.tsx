@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
-import { useParams } from 'react-router-dom';
 
 interface PokemonDetailsProps {
+  name: string;
   onClose: () => void;
 }
 
@@ -15,8 +15,7 @@ interface Pokemon {
   };
 }
 
-const PokemonDetails: React.FC<PokemonDetailsProps> = ({ onClose }) => {
-  const { name } = useParams<{ name: string }>();
+const PokemonDetails: React.FC<PokemonDetailsProps> = ({ name, onClose }) => {
   const [pokemon, setPokemon] = useState<Pokemon | null>(null);
   const [loading, setLoading] = useState<boolean>(true);
 
@@ -53,7 +52,6 @@ const PokemonDetails: React.FC<PokemonDetailsProps> = ({ onClose }) => {
       <img src={pokemon.sprites.front_default} alt={pokemon.name} />
       <p>Height: {pokemon.height}</p>
       <p>Weight: {pokemon.weight}</p>
-      {/* Add more details as needed */}
     </div>
   );
 };
