@@ -1,66 +1,60 @@
-import { useState, useEffect, useCallback } from 'react';
+import React, { useEffect, useState } from 'react';
 import axios from 'axios';
+
+interface PokemonListProps {
+  searchTerm: string;
+  currentPage: number;
+  onPokemonClick: (name: string) => void;
+}
 
 interface Pokemon {
   name: string;
-  url: string;
 }
 
-interface Props {
-  searchTerm: string;
-}
-
-const usePokemonList = (searchTerm: string) => {
-  const [pokemons, setPokemons] = useState<Pokemon[]>([]);
-  const [loading, setLoading] = useState<boolean>(false);
-  const [error, setError] = useState<string | null>(null);
-  const offset = 0;
-  const limit = 10;
-
-  const fetchPokemons = useCallback(async () => {
-    setLoading(true);
-    setError(null);
-    try {
-      const url = searchTerm
-        ? `https://pokeapi.co/api/v2/pokemon?offset=${offset}&limit=${limit}&name=${searchTerm}`
-        : `https://pokeapi.co/api/v2/pokemon?offset=${offset}&limit=${limit}`;
-
-      const response = await axios.get(url);
-      const pokemons = response.data.results.filter((pokemon: Pokemon) =>
-        pokemon.name.includes(searchTerm.toLowerCase())
-      );
-
-      setPokemons(pokemons);
-      setLoading(false);
-    } catch (error: unknown) {
-      if (error instanceof Error) {
-        setError(error.message);
-      } else {
-        setError(String(error));
-      }
-      setLoading(false);
-    }
-  }, [searchTerm]);
+const PokemonList: React.FC<PokemonListProps> = ({
+  searchTerm,
+  currentPage,
+  onPokemonClick,
+}) => {
+  const [pokemonList, setPokemonList] = useState<Pokemon[]>([]);
+  const [loading, setLoading] = useState<boolean>(true);
 
   useEffect(() => {
-    fetchPokemons();
-  }, [fetchPokemons]);
+    const fetchPokemonList = async () => {
+      setLoading(true);
+      try {
+        const response = await axios.get('https://pokeapi.co/api/v2/pokemon', {
+          params: {
+            offset: (currentPage - 1) * 20,
+            limit: 20,
+          },
+        });
+        setPokemonList(response.data.results);
+      } catch (error) {
+        console.error(error);
+      } finally {
+        setLoading(false);
+      }
+    };
 
-  return { pokemons, loading, error };
-};
+    fetchPokemonList();
+  }, [currentPage]);
 
-const PokemonList: React.FC<Props> = ({ searchTerm }) => {
-  const { pokemons, loading, error } = usePokemonList(searchTerm);
+  const filteredPokemonList = pokemonList.filter(pokemon =>
+    pokemon.name.toLowerCase().includes(searchTerm.toLowerCase())
+  );
+
+  if (loading) {
+    return <p>Loading...</p>;
+  }
 
   return (
-    <div>
-      {loading && <p>Loading...</p>}
-      {error && <p>{error}</p>}
-      <ul>
-        {pokemons.map((pokemon: Pokemon) => (
-          <li key={pokemon.name}>{pokemon.name}</li>
-        ))}
-      </ul>
+    <div className="pokemon-list">
+      {filteredPokemonList.map(pokemon => (
+        <div key={pokemon.name} onClick={() => onPokemonClick(pokemon.name)}>
+          {pokemon.name}
+        </div>
+      ))}
     </div>
   );
 };
