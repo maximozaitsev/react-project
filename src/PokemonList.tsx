@@ -1,4 +1,4 @@
-import { Component } from 'react';
+import { useState, useEffect, useCallback } from 'react';
 import axios from 'axios';
 
 interface Pokemon {
@@ -6,44 +6,20 @@ interface Pokemon {
   url: string;
 }
 
-interface State {
-  pokemons: Pokemon[];
-  loading: boolean;
-  error: string | null;
-  offset: number;
-  limit: number;
-}
-
 interface Props {
   searchTerm: string;
 }
 
-class PokemonList extends Component<Props, State> {
-  constructor(props: Props) {
-    super(props);
-    this.state = {
-      pokemons: [],
-      loading: false,
-      error: null,
-      offset: 0,
-      limit: 10,
-    };
-  }
+const PokemonList: React.FC<Props> = ({ searchTerm }) => {
+  const [pokemons, setPokemons] = useState<Pokemon[]>([]);
+  const [loading, setLoading] = useState<boolean>(false);
+  const [error, setError] = useState<string | null>(null);
+  const offset = 0;
+  const limit = 10;
 
-  componentDidMount() {
-    this.fetchPokemons();
-  }
-
-  componentDidUpdate(prevProps: Props) {
-    if (prevProps.searchTerm !== this.props.searchTerm) {
-      this.fetchPokemons();
-    }
-  }
-
-  fetchPokemons = async () => {
-    const { searchTerm } = this.props;
-    const { offset, limit } = this.state;
-    this.setState({ loading: true, error: null });
+  const fetchPokemons = useCallback(async () => {
+    setLoading(true);
+    setError(null);
     try {
       const url = searchTerm
         ? `https://pokeapi.co/api/v2/pokemon?offset=${offset}&limit=${limit}&name=${searchTerm}`
@@ -54,30 +30,33 @@ class PokemonList extends Component<Props, State> {
         pokemon.name.includes(searchTerm.toLowerCase())
       );
 
-      this.setState({ pokemons, loading: false });
+      setPokemons(pokemons);
+      setLoading(false);
     } catch (error: unknown) {
       if (error instanceof Error) {
-        this.setState({ error: error.message, loading: false });
+        setError(error.message);
       } else {
-        this.setState({ error: String(error), loading: false });
+        setError(String(error));
       }
+      setLoading(false);
     }
-  };
+  }, [searchTerm, offset, limit]);
 
-  render() {
-    const { pokemons, loading, error } = this.state;
-    return (
-      <div>
-        {loading && <p>Loading...</p>}
-        {error && <p>{error}</p>}
-        <ul>
-          {pokemons.map((pokemon: Pokemon) => (
-            <li key={pokemon.name}>{pokemon.name}</li>
-          ))}
-        </ul>
-      </div>
-    );
-  }
-}
+  useEffect(() => {
+    fetchPokemons();
+  }, [fetchPokemons]);
+
+  return (
+    <div>
+      {loading && <p>Loading...</p>}
+      {error && <p>{error}</p>}
+      <ul>
+        {pokemons.map((pokemon: Pokemon) => (
+          <li key={pokemon.name}>{pokemon.name}</li>
+        ))}
+      </ul>
+    </div>
+  );
+};
 
 export default PokemonList;
