@@ -1,0 +1,51 @@
+/* index.css */
+.App {
+  text-align: center;
+}
+
+.bottom-section {
+  display: flex;
+  justify-content: space-around;
+  padding: 20px;
+}
+
+.search {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.search input {
+  padding: 8px;
+  font-size: 16px;
+}
+
+.search button {
+  padding: 8px 16px;
+  font-size: 16px;
+  margin-left: 8px;
+}
+
+li {
+  list-style-type: none;
+}
+
+.pokemon-list {
+  padding-bottom: 10px;
+}
+
+.pokemon-list div {
+  cursor: pointer;
+}
+
+.pokemon-list div:hover {
+  background: gainsboro;
+}
+
+.pagination span {
+  padding: 0 5px;
+}
+
+button {
+  cursor: pointer;
+}
