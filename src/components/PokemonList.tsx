@@ -1,5 +1,8 @@
-import React, { useEffect, useState } from 'react';
-import axios from 'axios';
+// src/components/PokemonList.tsx
+import React, { useEffect } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import { fetchPokemon } from '../reducers/pokemonSlice';
+import { RootState, AppDispatch } from '../store';
 
 interface PokemonListProps {
   searchTerm: string;
@@ -7,41 +10,20 @@ interface PokemonListProps {
   onPokemonClick: (name: string) => void;
 }
 
-interface Pokemon {
-  name: string;
-}
-
 const PokemonList: React.FC<PokemonListProps> = ({
   searchTerm,
   currentPage,
   onPokemonClick,
 }) => {
-  const [pokemonList, setPokemonList] = useState<Pokemon[]>([]);
-  const [loading, setLoading] = useState<boolean>(true);
+  const dispatch = useDispatch<AppDispatch>();
+  const { list, loading } = useSelector((state: RootState) => state.pokemon);
 
   useEffect(() => {
-    const fetchPokemonList = async () => {
-      setLoading(true);
-      try {
-        const response = await axios.get('https://pokeapi.co/api/v2/pokemon', {
-          params: {
-            offset: (currentPage - 1) * 20,
-            limit: 20,
-          },
-        });
-        setPokemonList(response.data.results);
-      } catch (error) {
-        console.error(error);
-      } finally {
-        setLoading(false);
-      }
-    };
+    dispatch(fetchPokemon(currentPage));
+  }, [currentPage, dispatch]);
 
-    fetchPokemonList();
-  }, [currentPage]);
-
-  const filteredPokemonList = pokemonList.filter(pokemon =>
-    pokemon.name.toLowerCase().includes(searchTerm.toLowerCase())
+  const filteredPokemonList = list.filter(pokemon =>
+    pokemon.toLowerCase().includes(searchTerm.toLowerCase())
   );
 
   if (loading) {
@@ -51,8 +33,8 @@ const PokemonList: React.FC<PokemonListProps> = ({
   return (
     <div className="pokemon-list">
       {filteredPokemonList.map(pokemon => (
-        <div key={pokemon.name} onClick={() => onPokemonClick(pokemon.name)}>
-          {pokemon.name}
+        <div key={pokemon} onClick={() => onPokemonClick(pokemon)}>
+          {pokemon}
         </div>
       ))}
     </div>
