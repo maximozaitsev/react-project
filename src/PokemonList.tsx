@@ -1,83 +1,62 @@
-import { Component } from 'react';
+import React, { useEffect, useState } from 'react';
 import axios from 'axios';
+
+interface PokemonListProps {
+  searchTerm: string;
+  currentPage: number;
+  onPokemonClick: (name: string) => void;
+}
 
 interface Pokemon {
   name: string;
-  url: string;
 }
 
-interface State {
-  pokemons: Pokemon[];
-  loading: boolean;
-  error: string | null;
-  offset: number;
-  limit: number;
-}
+const PokemonList: React.FC<PokemonListProps> = ({
+  searchTerm,
+  currentPage,
+  onPokemonClick,
+}) => {
+  const [pokemonList, setPokemonList] = useState<Pokemon[]>([]);
+  const [loading, setLoading] = useState<boolean>(true);
 
-interface Props {
-  searchTerm: string;
-}
-
-class PokemonList extends Component<Props, State> {
-  constructor(props: Props) {
-    super(props);
-    this.state = {
-      pokemons: [],
-      loading: false,
-      error: null,
-      offset: 0,
-      limit: 10,
-    };
-  }
-
-  componentDidMount() {
-    this.fetchPokemons();
-  }
-
-  componentDidUpdate(prevProps: Props) {
-    if (prevProps.searchTerm !== this.props.searchTerm) {
-      this.fetchPokemons();
-    }
-  }
-
-  fetchPokemons = async () => {
-    const { searchTerm } = this.props;
-    const { offset, limit } = this.state;
-    this.setState({ loading: true, error: null });
-    try {
-      const url = searchTerm
-        ? `https://pokeapi.co/api/v2/pokemon?offset=${offset}&limit=${limit}&name=${searchTerm}`
-        : `https://pokeapi.co/api/v2/pokemon?offset=${offset}&limit=${limit}`;
-
-      const response = await axios.get(url);
-      const pokemons = response.data.results.filter((pokemon: Pokemon) =>
-        pokemon.name.includes(searchTerm.toLowerCase())
-      );
-
-      this.setState({ pokemons, loading: false });
-    } catch (error: unknown) {
-      if (error instanceof Error) {
-        this.setState({ error: error.message, loading: false });
-      } else {
-        this.setState({ error: String(error), loading: false });
+  useEffect(() => {
+    const fetchPokemonList = async () => {
+      setLoading(true);
+      try {
+        const response = await axios.get('https://pokeapi.co/api/v2/pokemon', {
+          params: {
+            offset: (currentPage - 1) * 20,
+            limit: 20,
+          },
+        });
+        setPokemonList(response.data.results);
+      } catch (error) {
+        console.error(error);
+      } finally {
+        setLoading(false);
       }
-    }
-  };
+    };
 
-  render() {
-    const { pokemons, loading, error } = this.state;
-    return (
-      <div>
-        {loading && <p>Loading...</p>}
-        {error && <p>{error}</p>}
-        <ul>
-          {pokemons.map((pokemon: Pokemon) => (
-            <li key={pokemon.name}>{pokemon.name}</li>
-          ))}
-        </ul>
-      </div>
-    );
+    fetchPokemonList();
+  }, [currentPage]);
+
+  const filteredPokemonList = pokemonList.filter(pokemon =>
+    pokemon.name.toLowerCase().includes(searchTerm.toLowerCase())
+  );
+
+  if (loading) {
+    return <p>Loading...</p>;
   }
-}
+
+  return (
+    <div className="pokemon-list">
+      {filteredPokemonList.map(pokemon => (
+        <div key={pokemon.name} onClick={() => onPokemonClick(pokemon.name)}>
+          {pokemon.name}
+        </div>
+      ))}
+    </div>
+  );
+};
 
 export default PokemonList;

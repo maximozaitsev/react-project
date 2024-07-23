@@ -4,6 +4,8 @@
 }
 
 .bottom-section {
+  display: flex;
+  justify-content: space-around;
   padding: 20px;
 }
 
@@ -26,4 +28,24 @@
 
 li {
   list-style-type: none;
+}
+
+.pokemon-list {
+  padding-bottom: 10px;
+}
+
+.pokemon-list div {
+  cursor: pointer;
+}
+
+.pokemon-list div:hover {
+  background: gainsboro;
+}
+
+.pagination span {
+  padding: 0 5px;
+}
+
+button {
+  cursor: pointer;
 }

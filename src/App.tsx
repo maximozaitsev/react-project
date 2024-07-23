@@ -1,41 +1,17 @@
-import { Component } from 'react';
-import Search from './Search';
-import PokemonList from './PokemonList';
+import React from 'react';
+import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
+import Home from './components/Home';
+import NotFound from './components/NotFound';
 
-interface State {
-  searchTerm: string;
-}
-
-class App extends Component<Record<string, never>, State> {
-  constructor(props: Record<string, never>) {
-    super(props);
-    this.state = {
-      searchTerm: '',
-    };
-  }
-
-  handleSearch = (term: string) => {
-    this.setState({ searchTerm: term });
-  };
-
-  throwError = () => {
-    throw new Error('Test error');
-  };
-
-  render() {
-    return (
-      <div className="App">
-        <h1>My Pokemon App</h1>
-        <div className="top-section">
-          <Search onSearch={this.handleSearch} />
-        </div>
-        <div className="bottom-section">
-          <PokemonList searchTerm={this.state.searchTerm} />
-        </div>
-        <button onClick={this.throwError}>Throw Error</button>
-      </div>
-    );
-  }
-}
+const App: React.FC = () => {
+  return (
+    <Router>
+      <Routes>
+        <Route path="/main" element={<Home />} />
+        <Route path="*" element={<NotFound />} />
+      </Routes>
+    </Router>
+  );
+};
 
 export default App;
