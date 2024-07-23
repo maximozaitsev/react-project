@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
-import Search from '../Search';
-import PokemonList from '../PokemonList';
+import Search from './Search';
+import PokemonList from './PokemonList';
 import Pagination from '../components/Pagination';
 import PokemonDetails from '../components/PokemonDetails';
 
