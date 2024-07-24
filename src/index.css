@@ -25,10 +25,6 @@ li {
   background: gainsboro;
 }
 
-.pagination span {
-  padding: 0 5px;
-}
-
 button {
   cursor: pointer;
 }
