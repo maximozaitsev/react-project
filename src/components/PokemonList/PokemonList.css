@@ -1,0 +1,11 @@
+.pokemon-list {
+  padding-bottom: 10px;
+}
+
+.pokemon-list div {
+  cursor: pointer;
+}
+
+.pokemon-list div:hover {
+  background: gainsboro;
+}

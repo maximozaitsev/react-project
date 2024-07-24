@@ -1,8 +1,9 @@
 // src/components/PokemonList.tsx
 import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { fetchPokemon } from '../reducers/pokemonSlice';
-import { RootState, AppDispatch } from '../store';
+import { fetchPokemon } from '../../reducers/pokemonSlice';
+import { RootState, AppDispatch } from '../../store';
+import './PokemonList.css';
 
 interface PokemonListProps {
   searchTerm: string;

@@ -9,22 +9,6 @@
   padding: 20px;
 }
 
-li {
-  list-style-type: none;
-}
-
-.pokemon-list {
-  padding-bottom: 10px;
-}
-
-.pokemon-list div {
-  cursor: pointer;
-}
-
-.pokemon-list div:hover {
-  background: gainsboro;
-}
-
 button {
   cursor: pointer;
 }

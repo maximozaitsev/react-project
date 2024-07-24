@@ -2,7 +2,7 @@
 import { render, screen, waitFor } from '@testing-library/react';
 import '@testing-library/jest-dom';
 import axios from 'axios';
-import PokemonList from '../components/PokemonList';
+import PokemonList from '../components/PokemonList/PokemonList';
 
 jest.mock('axios');
 const mockedAxios = axios as jest.Mocked<typeof axios>;
