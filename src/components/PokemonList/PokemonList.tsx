@@ -1,8 +1,8 @@
-// src/components/PokemonList.tsx
-import React, { useEffect, useState } from 'react';
+import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { fetchPokemon } from '../../reducers/pokemonSlice';
-import { RootState, AppDispatch } from '../../store';
+import { fetchPokemon } from '../../store/reducers/pokemonSlice';
+import { RootState, AppDispatch } from '../../store/store';
+import { toggleSelectPokemon } from '../../store/reducers/selectedPokemonSlice';
 import './PokemonList.css';
 
 interface PokemonListProps {
@@ -18,7 +18,9 @@ const PokemonList: React.FC<PokemonListProps> = ({
 }) => {
   const dispatch = useDispatch<AppDispatch>();
   const { list, loading } = useSelector((state: RootState) => state.pokemon);
-  const [checkedPokemon, setCheckedPokemon] = useState<string[]>([]);
+  const selectedPokemon = useSelector(
+    (state: RootState) => state.selectedPokemon
+  );
 
   useEffect(() => {
     dispatch(fetchPokemon(currentPage));
@@ -33,11 +35,7 @@ const PokemonList: React.FC<PokemonListProps> = ({
     event: React.ChangeEvent<HTMLInputElement>
   ) => {
     event.stopPropagation();
-    setCheckedPokemon(prevState =>
-      prevState.includes(pokemon)
-        ? prevState.filter(item => item !== pokemon)
-        : [...prevState, pokemon]
-    );
+    dispatch(toggleSelectPokemon(pokemon));
   };
 
   if (loading) {
@@ -54,7 +52,7 @@ const PokemonList: React.FC<PokemonListProps> = ({
         >
           <input
             type="checkbox"
-            checked={checkedPokemon.includes(pokemon)}
+            checked={selectedPokemon.includes(pokemon)}
             onChange={event => handleCheckboxChange(pokemon, event)}
             onClick={event => event.stopPropagation()}
           />
