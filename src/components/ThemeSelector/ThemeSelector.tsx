@@ -1,34 +1,18 @@
 import React from 'react';
 import useTheme from '../../hooks/useTheme';
+import './ThemeSelector.css';
 
 const ThemeSelector: React.FC = () => {
   const { theme, setTheme } = useTheme();
 
-  const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    setTheme(event.target.value as 'light' | 'dark');
+  const handleClick = () => {
+    setTheme(theme === 'light' ? 'dark' : 'light');
   };
 
   return (
-    <div>
-      <label>
-        <input
-          type="radio"
-          value="light"
-          checked={theme === 'light'}
-          onChange={handleChange}
-        />
-        Light
-      </label>
-      <label>
-        <input
-          type="radio"
-          value="dark"
-          checked={theme === 'dark'}
-          onChange={handleChange}
-        />
-        Dark
-      </label>
-    </div>
+    <button className={`theme-selector ${theme}`} onClick={handleClick}>
+      {theme === 'light' ? 'Dark' : 'Light'}
+    </button>
   );
 };
 

@@ -1,0 +1,25 @@
+.theme-selector {
+  padding: 10px 20px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 16px;
+  transition:
+    background-color 0.3s ease,
+    color 0.3s ease;
+  margin: auto 20px;
+}
+
+.theme-selector.light {
+  background-color: #f0f0f0;
+  color: #000000;
+}
+
+.theme-selector.dark {
+  background-color: #333333;
+  color: #ffffff;
+}
+
+.theme-selector:hover {
+  opacity: 0.8;
+}

@@ -5,8 +5,8 @@ import './Header.css';
 const Header: React.FC = () => {
   return (
     <header>
-      <ThemeSelector />
       <h1>My Pokemon App</h1>
+      <ThemeSelector />
     </header>
   );
 };
