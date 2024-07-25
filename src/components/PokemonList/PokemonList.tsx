@@ -3,6 +3,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { fetchPokemon } from '../../store/reducers/pokemonSlice';
 import { RootState, AppDispatch } from '../../store/store';
 import { toggleSelectPokemon } from '../../store/reducers/selectedPokemonSlice';
+import useTheme from '../../hooks/useTheme';
 import './PokemonList.css';
 
 interface PokemonListProps {
@@ -21,6 +22,8 @@ const PokemonList: React.FC<PokemonListProps> = ({
   const selectedPokemon = useSelector(
     (state: RootState) => state.selectedPokemon
   );
+
+  const { theme } = useTheme();
 
   useEffect(() => {
     dispatch(fetchPokemon(currentPage));
@@ -43,11 +46,11 @@ const PokemonList: React.FC<PokemonListProps> = ({
   }
 
   return (
-    <div className="pokemon-list">
+    <div className={`pokemon-list ${theme}`}>
       {filteredPokemonList.map(pokemon => (
         <div
           key={pokemon}
-          className="pokemon-item"
+          className={`pokemon-item ${theme}`}
           onClick={() => onPokemonClick(pokemon)}
         >
           <input

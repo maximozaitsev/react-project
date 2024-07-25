@@ -7,8 +7,12 @@
   cursor: pointer;
 }
 
-.pokemon-list div:hover {
+.pokemon-list.light div:hover {
   background: gainsboro;
+}
+
+.pokemon-list.dark div:hover {
+  background: rgb(57, 57, 57);
 }
 
 .pokemon-item input {
