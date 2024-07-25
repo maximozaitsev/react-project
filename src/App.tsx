@@ -5,11 +5,14 @@ import Home from './components/Home';
 import NotFound from './components/NotFound/NotFound';
 import Flyout from './components/Flyout/Flyout';
 import { RootState } from './store/store';
+import ThemeSelector from './components/ThemeSelector/ThemeSelector';
+import { useTheme } from './contexts/ThemeContext';
 
 const App: React.FC = () => {
   const selectedPokemon = useSelector(
     (state: RootState) => state.selectedPokemon
   );
+  const { theme } = useTheme();
 
   const handleDownload = () => {
     const csvContent = `data:text/csv;charset=utf-8,${selectedPokemon.join('\n')}`;
@@ -23,13 +26,16 @@ const App: React.FC = () => {
   };
 
   return (
-    <Router>
-      <Routes>
-        <Route path="/main" element={<Home />} />
-        <Route path="*" element={<NotFound />} />
-      </Routes>
-      {selectedPokemon.length > 0 && <Flyout onDownload={handleDownload} />}
-    </Router>
+    <div className={`app ${theme}`}>
+      <Router>
+        <ThemeSelector />
+        <Routes>
+          <Route path="/main" element={<Home />} />
+          <Route path="*" element={<NotFound />} />
+        </Routes>
+        {selectedPokemon.length > 0 && <Flyout onDownload={handleDownload} />}
+      </Router>
+    </div>
   );
 };
 
