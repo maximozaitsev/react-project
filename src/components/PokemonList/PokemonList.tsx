@@ -1,5 +1,5 @@
 // src/components/PokemonList.tsx
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { fetchPokemon } from '../../reducers/pokemonSlice';
 import { RootState, AppDispatch } from '../../store';
@@ -18,6 +18,7 @@ const PokemonList: React.FC<PokemonListProps> = ({
 }) => {
   const dispatch = useDispatch<AppDispatch>();
   const { list, loading } = useSelector((state: RootState) => state.pokemon);
+  const [checkedPokemon, setCheckedPokemon] = useState<string[]>([]);
 
   useEffect(() => {
     dispatch(fetchPokemon(currentPage));
@@ -27,6 +28,14 @@ const PokemonList: React.FC<PokemonListProps> = ({
     pokemon.toLowerCase().includes(searchTerm.toLowerCase())
   );
 
+  const handleCheckboxChange = (pokemon: string) => {
+    setCheckedPokemon(prevState =>
+      prevState.includes(pokemon)
+        ? prevState.filter(item => item !== pokemon)
+        : [...prevState, pokemon]
+    );
+  };
+
   if (loading) {
     return <p>Loading...</p>;
   }
@@ -34,8 +43,13 @@ const PokemonList: React.FC<PokemonListProps> = ({
   return (
     <div className="pokemon-list">
       {filteredPokemonList.map(pokemon => (
-        <div key={pokemon} onClick={() => onPokemonClick(pokemon)}>
-          {pokemon}
+        <div key={pokemon} className="pokemon-item">
+          <input
+            type="checkbox"
+            checked={checkedPokemon.includes(pokemon)}
+            onChange={() => handleCheckboxChange(pokemon)}
+          />
+          <span onClick={() => onPokemonClick(pokemon)}>{pokemon}</span>
         </div>
       ))}
     </div>

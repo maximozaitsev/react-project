@@ -3,9 +3,14 @@
 }
 
 .pokemon-list div {
+  text-align: left;
   cursor: pointer;
 }
 
 .pokemon-list div:hover {
   background: gainsboro;
+}
+
+.pokemon-item input {
+  margin-right: 1rem;
 }
