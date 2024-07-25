@@ -28,7 +28,11 @@ const PokemonList: React.FC<PokemonListProps> = ({
     pokemon.toLowerCase().includes(searchTerm.toLowerCase())
   );
 
-  const handleCheckboxChange = (pokemon: string) => {
+  const handleCheckboxChange = (
+    pokemon: string,
+    event: React.ChangeEvent<HTMLInputElement>
+  ) => {
+    event.stopPropagation();
     setCheckedPokemon(prevState =>
       prevState.includes(pokemon)
         ? prevState.filter(item => item !== pokemon)
@@ -43,13 +47,18 @@ const PokemonList: React.FC<PokemonListProps> = ({
   return (
     <div className="pokemon-list">
       {filteredPokemonList.map(pokemon => (
-        <div key={pokemon} className="pokemon-item">
+        <div
+          key={pokemon}
+          className="pokemon-item"
+          onClick={() => onPokemonClick(pokemon)}
+        >
           <input
             type="checkbox"
             checked={checkedPokemon.includes(pokemon)}
-            onChange={() => handleCheckboxChange(pokemon)}
+            onChange={event => handleCheckboxChange(pokemon, event)}
+            onClick={event => event.stopPropagation()}
           />
-          <span onClick={() => onPokemonClick(pokemon)}>{pokemon}</span>
+          <span>{pokemon}</span>
         </div>
       ))}
     </div>
