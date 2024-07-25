@@ -3,7 +3,7 @@ import './Flyout.css';
 import { useDispatch, useSelector } from 'react-redux';
 import { RootState } from '../../store/store';
 import { clearSelectedPokemon } from '../../store/reducers/selectedPokemonSlice';
-import { useTheme } from '../../contexts/ThemeContext';
+import useTheme from '../../hooks/useTheme';
 
 interface FlyoutProps {
   onDownload: () => void;

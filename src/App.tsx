@@ -6,7 +6,7 @@ import NotFound from './components/NotFound/NotFound';
 import Flyout from './components/Flyout/Flyout';
 import { RootState } from './store/store';
 import ThemeSelector from './components/ThemeSelector/ThemeSelector';
-import { useTheme } from './contexts/ThemeContext';
+import useTheme from './hooks/useTheme';
 
 const App: React.FC = () => {
   const selectedPokemon = useSelector(
