@@ -5,8 +5,8 @@ import Home from './components/Home';
 import NotFound from './components/NotFound/NotFound';
 import Flyout from './components/Flyout/Flyout';
 import { RootState } from './store/store';
-import ThemeSelector from './components/ThemeSelector/ThemeSelector';
 import useTheme from './hooks/useTheme';
+import Header from './components/Header/Header';
 
 const App: React.FC = () => {
   const selectedPokemon = useSelector(
@@ -28,7 +28,7 @@ const App: React.FC = () => {
   return (
     <div className={`app ${theme}`}>
       <Router>
-        <ThemeSelector />
+        <Header />
         <Routes>
           <Route path="/main" element={<Home />} />
           <Route path="*" element={<NotFound />} />

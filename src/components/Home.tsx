@@ -32,7 +32,6 @@ const Home: React.FC = () => {
 
   return (
     <div className="App">
-      <h1>My Pokemon App</h1>
       <div className="top-section">
         <Search onSearch={handleSearch} />
       </div>
