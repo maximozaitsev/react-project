@@ -28,6 +28,9 @@ const PokemonList: React.FC<PokemonListProps> = ({
   );
   const { theme } = useTheme();
 
+  // console.log('List of Pokemon:', list);
+  // console.log('Selected Pokemon:', selectedPokemon);
+
   const filteredPokemonList = list.filter((pokemon: string) =>
     pokemon.toLowerCase().includes(searchTerm.toLowerCase())
   );
