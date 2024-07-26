@@ -1,13 +1,5 @@
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
-
-interface Pokemon {
-  name: string;
-  height: number;
-  weight: number;
-  sprites: {
-    front_default: string;
-  };
-}
+import { Pokemon } from './types';
 
 export const pokemonApi = createApi({
   reducerPath: 'pokemonApi',
