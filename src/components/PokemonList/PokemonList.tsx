@@ -1,8 +1,8 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { fetchPokemon } from '../../store/reducers/pokemonSlice';
 import { RootState, AppDispatch } from '../../store/store';
 import { toggleSelectPokemon } from '../../store/reducers/selectedPokemonSlice';
+import { useFetchPokemonListQuery } from '../../services/pokemonApi';
 import useTheme from '../../hooks/useTheme';
 import './PokemonList.css';
 
@@ -18,18 +18,17 @@ const PokemonList: React.FC<PokemonListProps> = ({
   onPokemonClick,
 }) => {
   const dispatch = useDispatch<AppDispatch>();
-  const { list, loading } = useSelector((state: RootState) => state.pokemon);
+  const {
+    data: list = [],
+    error,
+    isLoading,
+  } = useFetchPokemonListQuery(currentPage);
   const selectedPokemon = useSelector(
     (state: RootState) => state.selectedPokemon
   );
-
   const { theme } = useTheme();
 
-  useEffect(() => {
-    dispatch(fetchPokemon(currentPage));
-  }, [currentPage, dispatch]);
-
-  const filteredPokemonList = list.filter(pokemon =>
+  const filteredPokemonList = list.filter((pokemon: string) =>
     pokemon.toLowerCase().includes(searchTerm.toLowerCase())
   );
 
@@ -41,13 +40,17 @@ const PokemonList: React.FC<PokemonListProps> = ({
     dispatch(toggleSelectPokemon(pokemon));
   };
 
-  if (loading) {
+  if (isLoading) {
     return <p>Loading...</p>;
+  }
+
+  if (error) {
+    return <p>Error loading data</p>;
   }
 
   return (
     <div className={`pokemon-list ${theme}`}>
-      {filteredPokemonList.map(pokemon => (
+      {filteredPokemonList.map((pokemon: string) => (
         <div
           key={pokemon}
           className={`pokemon-item ${theme}`}
