@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<coverage generated="1722075258880" clover="3.2.0">
-  <project timestamp="1722075258880" name="All files">
-    <metrics statements="90" coveredstatements="81" conditionals="23" coveredconditionals="20" methods="32" coveredmethods="25" elements="145" coveredelements="126" complexity="0" loc="90" ncloc="90" packages="8" files="10" classes="10"/>
+<coverage generated="1722076926164" clover="3.2.0">
+  <project timestamp="1722076926164" name="All files">
+    <metrics statements="90" coveredstatements="85" conditionals="23" coveredconditionals="22" methods="32" coveredmethods="26" elements="145" coveredelements="133" complexity="0" loc="90" ncloc="90" packages="8" files="10" classes="10"/>
     <package name="components">
       <metrics statements="25" coveredstatements="25" conditionals="12" coveredconditionals="12" methods="5" coveredmethods="5"/>
       <file name="Home.tsx" path="/Users/maximozaitsev/Code/git repositories/react-project/src/components/Home.tsx">
@@ -97,11 +97,11 @@
       <metrics statements="1" coveredstatements="1" conditionals="0" coveredconditionals="0" methods="0" coveredmethods="0"/>
       <file name="ThemeContext.tsx" path="/Users/maximozaitsev/Code/git repositories/react-project/src/contexts/ThemeContext.tsx">
         <metrics statements="1" coveredstatements="1" conditionals="0" coveredconditionals="0" methods="0" coveredmethods="0"/>
-        <line num="10" count="1" type="stmt"/>
+        <line num="10" count="2" type="stmt"/>
       </file>
     </package>
     <package name="hooks">
-      <metrics statements="12" coveredstatements="8" conditionals="4" coveredconditionals="2" methods="5" coveredmethods="4"/>
+      <metrics statements="12" coveredstatements="12" conditionals="4" coveredconditionals="4" methods="5" coveredmethods="5"/>
       <file name="useSearchTerm.tsx" path="/Users/maximozaitsev/Code/git repositories/react-project/src/hooks/useSearchTerm.tsx">
         <metrics statements="7" coveredstatements="7" conditionals="2" coveredconditionals="2" methods="4" coveredmethods="4"/>
         <line num="3" count="1" type="stmt"/>
@@ -113,12 +113,12 @@
         <line num="14" count="3" type="stmt"/>
       </file>
       <file name="useTheme.tsx" path="/Users/maximozaitsev/Code/git repositories/react-project/src/hooks/useTheme.tsx">
-        <metrics statements="5" coveredstatements="1" conditionals="2" coveredconditionals="0" methods="1" coveredmethods="0"/>
-        <line num="4" count="1" type="stmt"/>
-        <line num="5" count="0" type="stmt"/>
-        <line num="6" count="0" type="cond" truecount="0" falsecount="2"/>
-        <line num="7" count="0" type="stmt"/>
-        <line num="9" count="0" type="stmt"/>
+        <metrics statements="5" coveredstatements="5" conditionals="2" coveredconditionals="2" methods="1" coveredmethods="1"/>
+        <line num="4" count="2" type="stmt"/>
+        <line num="5" count="6" type="stmt"/>
+        <line num="6" count="5" type="cond" truecount="2" falsecount="0"/>
+        <line num="7" count="4" type="stmt"/>
+        <line num="9" count="1" type="stmt"/>
       </file>
     </package>
     <package name="services">
