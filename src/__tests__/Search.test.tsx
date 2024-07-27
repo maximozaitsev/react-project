@@ -1,7 +1,7 @@
-// import React from 'react';
+import React from 'react';
 import { render, screen, fireEvent } from '@testing-library/react';
 import '@testing-library/jest-dom';
-import Search from '../components/Search';
+import Search from '../components/Search/Search';
 
 test('saves the entered value to local storage on search', () => {
   render(<Search onSearch={() => {}} />);

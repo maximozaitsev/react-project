@@ -1,39 +1,65 @@
 // src/__tests__/PokemonDetails.test.tsx
-// import React from 'react';
-import { render, screen, waitFor } from '@testing-library/react';
-import axios from 'axios';
+
+import React from 'react';
+import { render, screen } from '@testing-library/react';
 import PokemonDetails from '../components/PokemonDetails';
+import { useFetchPokemonDetailsQuery } from '../services/pokemonApi';
 
-jest.mock('axios');
-const mockedAxios = axios as jest.Mocked<typeof axios>;
+jest.mock('../services/pokemonApi', () => ({
+  useFetchPokemonDetailsQuery: jest.fn(),
+}));
 
-const mockPokemonData = {
-  name: 'pikachu',
-  height: 4,
-  weight: 60,
-  sprites: {
-    front_default:
-      'https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/25.png',
-  },
-};
+describe('PokemonDetails Component', () => {
+  const mockOnClose = jest.fn();
 
-test('renders pokemon details', async () => {
-  mockedAxios.get.mockResolvedValue({ data: mockPokemonData });
+  beforeEach(() => {
+    jest.clearAllMocks();
+  });
 
-  render(<PokemonDetails name="pikachu" onClose={() => {}} />);
+  test('displays loading message', () => {
+    (useFetchPokemonDetailsQuery as jest.Mock).mockReturnValue({
+      data: null,
+      isLoading: true,
+      error: null,
+    });
 
-  await waitFor(() => {
-    const nameElement = screen.getByText(/pikachu/i);
-    const heightElement = screen.getByText(/Height: 4/i);
-    const weightElement = screen.getByText(/Weight: 60/i);
-    const spriteElement = screen.getByAltText(/pikachu/i);
+    render(<PokemonDetails name="pikachu" onClose={mockOnClose} />);
 
-    expect(nameElement).toBeInTheDocument();
-    expect(heightElement).toBeInTheDocument();
-    expect(weightElement).toBeInTheDocument();
-    expect(spriteElement).toHaveAttribute(
+    expect(screen.getByText('Loading...')).toBeInTheDocument();
+  });
+
+  test('displays error message', () => {
+    (useFetchPokemonDetailsQuery as jest.Mock).mockReturnValue({
+      data: null,
+      isLoading: false,
+      error: true,
+    });
+
+    render(<PokemonDetails name="pikachu" onClose={mockOnClose} />);
+
+    expect(screen.getByText('Pokemon details not found')).toBeInTheDocument();
+  });
+
+  test('displays pokemon details', () => {
+    (useFetchPokemonDetailsQuery as jest.Mock).mockReturnValue({
+      data: {
+        name: 'pikachu',
+        sprites: { front_default: 'pikachu.png' },
+        height: 4,
+        weight: 60,
+      },
+      isLoading: false,
+      error: null,
+    });
+
+    render(<PokemonDetails name="pikachu" onClose={mockOnClose} />);
+
+    expect(screen.getByText('pikachu')).toBeInTheDocument();
+    expect(screen.getByAltText('pikachu')).toHaveAttribute(
       'src',
-      mockPokemonData.sprites.front_default
+      'pikachu.png'
     );
+    expect(screen.getByText('Height: 4')).toBeInTheDocument();
+    expect(screen.getByText('Weight: 60')).toBeInTheDocument();
   });
 });

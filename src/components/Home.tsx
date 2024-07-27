@@ -1,8 +1,8 @@
 import React, { useState } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
-import Search from './Search';
-import PokemonList from './PokemonList';
-import Pagination from '../components/Pagination';
+import Search from './Search/Search';
+import PokemonList from './PokemonList/PokemonList';
+import Pagination from './Pagination/Pagination';
 import PokemonDetails from '../components/PokemonDetails';
 
 const Home: React.FC = () => {
@@ -32,7 +32,6 @@ const Home: React.FC = () => {
 
   return (
     <div className="App">
-      <h1>My Pokemon App</h1>
       <div className="top-section">
         <Search onSearch={handleSearch} />
       </div>
