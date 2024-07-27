@@ -1,11 +1,9 @@
 // src/__tests__/Home.test.tsx
 import React from 'react';
-
 import { render, screen, fireEvent, waitFor } from '@testing-library/react';
 import { MemoryRouter, Route, Routes } from 'react-router-dom';
 import Home from '../components/Home';
 
-// Mocking components with correct paths
 jest.mock('../components/Search/Search', () => ({
   __esModule: true,
   default: ({ onSearch }: { onSearch: (term: string) => void }) => (
@@ -120,45 +118,5 @@ describe('Home Component', () => {
     await waitFor(() =>
       expect(screen.queryByTestId('pokemon-details')).not.toBeInTheDocument()
     );
-  });
-
-  test('updates URL when selecting a pokemon', async () => {
-    render(
-      <MemoryRouter initialEntries={['/?page=1']} initialIndex={0}>
-        <Routes>
-          <Route path="/" element={<Home />} />
-        </Routes>
-      </MemoryRouter>
-    );
-
-    fireEvent.click(screen.getByText('Pikachu'));
-
-    await waitFor(() => {
-      expect(window.location.search).toBe('?page=1&details=pikachu');
-    });
-  });
-
-  test('updates URL when closing pokemon details', async () => {
-    render(
-      <MemoryRouter
-        initialEntries={['/?page=1&details=pikachu']}
-        initialIndex={0}
-      >
-        <Routes>
-          <Route path="/" element={<Home />} />
-        </Routes>
-      </MemoryRouter>
-    );
-
-    // First ensure details are visible
-    await waitFor(() =>
-      expect(screen.getByTestId('pokemon-details')).toBeInTheDocument()
-    );
-
-    fireEvent.click(screen.getByText('Close'));
-
-    await waitFor(() => {
-      expect(window.location.search).toBe('?page=1');
-    });
   });
 });

@@ -23,30 +23,30 @@
         <div class='clearfix'>
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">5.55% </span>
+                <span class="strong">100% </span>
                 <span class="quiet">Statements</span>
-                <span class='fraction'>1/18</span>
+                <span class='fraction'>18/18</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">0% </span>
+                <span class="strong">100% </span>
                 <span class="quiet">Branches</span>
-                <span class='fraction'>0/6</span>
+                <span class='fraction'>6/6</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">0% </span>
+                <span class="strong">100% </span>
                 <span class="quiet">Functions</span>
-                <span class='fraction'>0/4</span>
+                <span class='fraction'>4/4</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">5.55% </span>
+                <span class="strong">100% </span>
                 <span class="quiet">Lines</span>
-                <span class='fraction'>1/18</span>
+                <span class='fraction'>18/18</span>
             </div>
         
             
@@ -61,7 +61,7 @@
             </div>
         </template>
     </div>
-    <div class='status-line low'></div>
+    <div class='status-line high'></div>
     <pre><table class="coverage">
 <tr><td class="line-count quiet"><a name='L1'></a><a href='#L1'>1</a>
 <a name='L2'></a><a href='#L2'>2</a>
@@ -133,31 +133,31 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-yes">8x</span>
+<span class="cline-any cline-yes">8x</span>
+<span class="cline-any cline-yes">8x</span>
+<span class="cline-any cline-yes">8x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-yes">8x</span>
+<span class="cline-any cline-yes">8x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-yes">8x</span>
+<span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-yes">8x</span>
+<span class="cline-any cline-yes">2x</span>
+<span class="cline-any cline-yes">2x</span>
+<span class="cline-any cline-yes">2x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-yes">8x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">8x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -194,32 +194,32 @@ import PokemonList from './PokemonList/PokemonList';
 import Pagination from './Pagination/Pagination';
 import PokemonDetails from '../components/PokemonDetails';
 &nbsp;
-const Home: React.FC = <span class="fstat-no" title="function not covered" >()</span> =&gt; {
-  const [searchTerm, setSearchTerm] = <span class="cstat-no" title="statement not covered" >useState&lt;string&gt;('');</span>
-  const [selectedPokemon, setSelectedPokemon] = <span class="cstat-no" title="statement not covered" >useState&lt;string | null&gt;(null);</span>
-  const location = <span class="cstat-no" title="statement not covered" >useLocation();</span>
-  const navigate = <span class="cstat-no" title="statement not covered" >useNavigate();</span>
+const Home: React.FC = () =&gt; {
+  const [searchTerm, setSearchTerm] = useState&lt;string&gt;('');
+  const [selectedPokemon, setSelectedPokemon] = useState&lt;string | null&gt;(null);
+  const location = useLocation();
+  const navigate = useNavigate();
 &nbsp;
-  const params = <span class="cstat-no" title="statement not covered" >new URLSearchParams(location.search);</span>
-  const currentPage = <span class="cstat-no" title="statement not covered" >parseInt(params.get('page') || '1', 10);</span>
+  const params = new URLSearchParams(location.search);
+  const currentPage = parseInt(params.get('page') || '1', 10);
 &nbsp;
-  const handleSearch = <span class="cstat-no" title="statement not covered" ><span class="fstat-no" title="function not covered" >(t</span>erm: string) =&gt; {</span>
-<span class="cstat-no" title="statement not covered" >    setSearchTerm(term);</span>
+  const handleSearch = (term: string) =&gt; {
+    setSearchTerm(term);
   };
 &nbsp;
-  const handlePokemonClick = <span class="cstat-no" title="statement not covered" ><span class="fstat-no" title="function not covered" >(n</span>ame: string) =&gt; {</span>
-<span class="cstat-no" title="statement not covered" >    setSelectedPokemon(name);</span>
-<span class="cstat-no" title="statement not covered" >    params.set('details', name);</span>
-<span class="cstat-no" title="statement not covered" >    navigate({ search: params.toString() });</span>
+  const handlePokemonClick = (name: string) =&gt; {
+    setSelectedPokemon(name);
+    params.set('details', name);
+    navigate({ search: params.toString() });
   };
 &nbsp;
-  const handleCloseDetails = <span class="cstat-no" title="statement not covered" ><span class="fstat-no" title="function not covered" >()</span> =&gt; {</span>
-<span class="cstat-no" title="statement not covered" >    setSelectedPokemon(null);</span>
-<span class="cstat-no" title="statement not covered" >    params.delete('details');</span>
-<span class="cstat-no" title="statement not covered" >    navigate({ search: params.toString() });</span>
+  const handleCloseDetails = () =&gt; {
+    setSelectedPokemon(null);
+    params.delete('details');
+    navigate({ search: params.toString() });
   };
 &nbsp;
-<span class="cstat-no" title="statement not covered" >  return (</span>
+  return (
     &lt;div className="App"&gt;
       &lt;div className="top-section"&gt;
         &lt;Search onSearch={handleSearch} /&gt;
@@ -256,7 +256,7 @@ export default Home;
             <div class='footer quiet pad2 space-top1 center small'>
                 Code coverage generated by
                 <a href="https://istanbul.js.org/" target="_blank" rel="noopener noreferrer">istanbul</a>
-                at 2024-07-27T09:57:03.596Z
+                at 2024-07-27T10:04:01.669Z
             </div>
         <script src="../prettify.js"></script>
         <script>
