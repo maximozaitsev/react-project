@@ -1,75 +1,86 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<coverage generated="1722019056790" clover="3.2.0">
-  <project timestamp="1722019056790" name="All files">
-    <metrics statements="72" coveredstatements="12" conditionals="17" coveredconditionals="0" methods="28" coveredmethods="1" elements="117" coveredelements="13" complexity="0" loc="72" ncloc="72" packages="8" files="9" classes="9"/>
+<coverage generated="1722074057543" clover="3.2.0">
+  <project timestamp="1722074057543" name="All files">
+    <metrics statements="83" coveredstatements="69" conditionals="17" coveredconditionals="12" methods="31" coveredmethods="22" elements="131" coveredelements="103" complexity="0" loc="83" ncloc="83" packages="8" files="9" classes="9"/>
     <package name="components">
-      <metrics statements="7" coveredstatements="1" conditionals="6" coveredconditionals="0" methods="1" coveredmethods="0"/>
-      <file name="PokemonDetails.tsx" path="/Users/maximozaitsev/Code/git repositories/react-project/src/components/PokemonDetails.tsx">
-        <metrics statements="7" coveredstatements="1" conditionals="6" coveredconditionals="0" methods="1" coveredmethods="0"/>
-        <line num="9" count="1" type="stmt"/>
-        <line num="10" count="0" type="stmt"/>
-        <line num="12" count="0" type="cond" truecount="0" falsecount="2"/>
-        <line num="13" count="0" type="stmt"/>
-        <line num="16" count="0" type="cond" truecount="0" falsecount="4"/>
-        <line num="17" count="0" type="stmt"/>
-        <line num="20" count="0" type="stmt"/>
+      <metrics statements="18" coveredstatements="18" conditionals="6" coveredconditionals="6" methods="4" coveredmethods="4"/>
+      <file name="Home.tsx" path="/Users/maximozaitsev/Code/git repositories/react-project/src/components/Home.tsx">
+        <metrics statements="18" coveredstatements="18" conditionals="6" coveredconditionals="6" methods="4" coveredmethods="4"/>
+        <line num="8" count="1" type="stmt"/>
+        <line num="9" count="11" type="stmt"/>
+        <line num="10" count="11" type="stmt"/>
+        <line num="11" count="11" type="stmt"/>
+        <line num="12" count="11" type="stmt"/>
+        <line num="14" count="11" type="stmt"/>
+        <line num="15" count="11" type="cond" truecount="2" falsecount="0"/>
+        <line num="17" count="11" type="stmt"/>
+        <line num="18" count="1" type="stmt"/>
+        <line num="21" count="11" type="stmt"/>
+        <line num="22" count="3" type="stmt"/>
+        <line num="23" count="3" type="stmt"/>
+        <line num="24" count="3" type="stmt"/>
+        <line num="27" count="11" type="stmt"/>
+        <line num="28" count="1" type="stmt"/>
+        <line num="29" count="1" type="stmt"/>
+        <line num="30" count="1" type="stmt"/>
+        <line num="33" count="11" type="stmt"/>
       </file>
     </package>
     <package name="components.Pagination">
-      <metrics statements="10" coveredstatements="1" conditionals="0" coveredconditionals="0" methods="4" coveredmethods="0"/>
+      <metrics statements="10" coveredstatements="9" conditionals="0" coveredconditionals="0" methods="4" coveredmethods="3"/>
       <file name="Pagination.tsx" path="/Users/maximozaitsev/Code/git repositories/react-project/src/components/Pagination/Pagination.tsx">
-        <metrics statements="10" coveredstatements="1" conditionals="0" coveredconditionals="0" methods="4" coveredmethods="0"/>
+        <metrics statements="10" coveredstatements="9" conditionals="0" coveredconditionals="0" methods="4" coveredmethods="3"/>
         <line num="10" count="1" type="stmt"/>
-        <line num="11" count="0" type="stmt"/>
-        <line num="12" count="0" type="stmt"/>
-        <line num="14" count="0" type="stmt"/>
-        <line num="15" count="0" type="stmt"/>
-        <line num="16" count="0" type="stmt"/>
-        <line num="17" count="0" type="stmt"/>
-        <line num="20" count="0" type="stmt"/>
+        <line num="11" count="1" type="stmt"/>
+        <line num="12" count="1" type="stmt"/>
+        <line num="14" count="1" type="stmt"/>
+        <line num="15" count="1" type="stmt"/>
+        <line num="16" count="1" type="stmt"/>
+        <line num="17" count="1" type="stmt"/>
+        <line num="20" count="1" type="stmt"/>
         <line num="24" count="0" type="stmt"/>
-        <line num="33" count="0" type="stmt"/>
+        <line num="33" count="1" type="stmt"/>
       </file>
     </package>
     <package name="components.PokemonList">
-      <metrics statements="20" coveredstatements="1" conditionals="5" coveredconditionals="0" methods="8" coveredmethods="0"/>
+      <metrics statements="20" coveredstatements="19" conditionals="5" coveredconditionals="4" methods="8" coveredmethods="7"/>
       <file name="PokemonList.tsx" path="/Users/maximozaitsev/Code/git repositories/react-project/src/components/PokemonList/PokemonList.tsx">
-        <metrics statements="20" coveredstatements="1" conditionals="5" coveredconditionals="0" methods="8" coveredmethods="0"/>
+        <metrics statements="20" coveredstatements="19" conditionals="5" coveredconditionals="4" methods="8" coveredmethods="7"/>
         <line num="15" count="1" type="stmt"/>
-        <line num="20" count="0" type="stmt"/>
-        <line num="25" count="0" type="stmt"/>
-        <line num="26" count="0" type="stmt"/>
-        <line num="27" count="0" type="stmt"/>
-        <line num="29" count="0" type="stmt"/>
-        <line num="34" count="0" type="stmt"/>
-        <line num="35" count="0" type="stmt"/>
-        <line num="38" count="0" type="stmt"/>
-        <line num="42" count="0" type="stmt"/>
-        <line num="43" count="0" type="stmt"/>
-        <line num="46" count="0" type="cond" truecount="0" falsecount="2"/>
-        <line num="47" count="0" type="stmt"/>
-        <line num="50" count="0" type="cond" truecount="0" falsecount="2"/>
-        <line num="51" count="0" type="stmt"/>
-        <line num="54" count="0" type="stmt"/>
-        <line num="57" count="0" type="stmt"/>
+        <line num="20" count="6" type="stmt"/>
+        <line num="25" count="6" type="stmt"/>
+        <line num="26" count="6" type="stmt"/>
+        <line num="27" count="12" type="stmt"/>
+        <line num="29" count="6" type="stmt"/>
+        <line num="34" count="6" type="stmt"/>
+        <line num="35" count="8" type="stmt"/>
+        <line num="38" count="6" type="stmt"/>
+        <line num="42" count="1" type="stmt"/>
+        <line num="43" count="1" type="stmt"/>
+        <line num="46" count="6" type="cond" truecount="2" falsecount="0"/>
+        <line num="47" count="1" type="stmt"/>
+        <line num="50" count="5" type="cond" truecount="2" falsecount="0"/>
+        <line num="51" count="1" type="stmt"/>
+        <line num="54" count="4" type="stmt"/>
+        <line num="57" count="7" type="stmt"/>
         <line num="60" count="0" type="stmt"/>
-        <line num="65" count="0" type="stmt"/>
-        <line num="66" count="0" type="stmt"/>
+        <line num="65" count="1" type="stmt"/>
+        <line num="66" count="1" type="stmt"/>
       </file>
     </package>
     <package name="components.Search">
-      <metrics statements="9" coveredstatements="1" conditionals="0" coveredconditionals="0" methods="3" coveredmethods="0"/>
+      <metrics statements="9" coveredstatements="9" conditionals="0" coveredconditionals="0" methods="3" coveredmethods="3"/>
       <file name="Search.tsx" path="/Users/maximozaitsev/Code/git repositories/react-project/src/components/Search/Search.tsx">
-        <metrics statements="9" coveredstatements="1" conditionals="0" coveredconditionals="0" methods="3" coveredmethods="0"/>
+        <metrics statements="9" coveredstatements="9" conditionals="0" coveredconditionals="0" methods="3" coveredmethods="3"/>
         <line num="9" count="1" type="stmt"/>
-        <line num="10" count="0" type="stmt"/>
-        <line num="12" count="0" type="stmt"/>
-        <line num="13" count="0" type="stmt"/>
-        <line num="14" count="0" type="stmt"/>
-        <line num="15" count="0" type="stmt"/>
-        <line num="18" count="0" type="stmt"/>
-        <line num="19" count="0" type="stmt"/>
-        <line num="22" count="0" type="stmt"/>
+        <line num="10" count="3" type="stmt"/>
+        <line num="12" count="3" type="stmt"/>
+        <line num="13" count="1" type="stmt"/>
+        <line num="14" count="1" type="stmt"/>
+        <line num="15" count="1" type="stmt"/>
+        <line num="18" count="3" type="stmt"/>
+        <line num="19" count="1" type="stmt"/>
+        <line num="22" count="3" type="stmt"/>
       </file>
     </package>
     <package name="contexts">
@@ -80,16 +91,16 @@
       </file>
     </package>
     <package name="hooks">
-      <metrics statements="12" coveredstatements="2" conditionals="4" coveredconditionals="0" methods="5" coveredmethods="0"/>
+      <metrics statements="12" coveredstatements="8" conditionals="4" coveredconditionals="2" methods="5" coveredmethods="4"/>
       <file name="useSearchTerm.tsx" path="/Users/maximozaitsev/Code/git repositories/react-project/src/hooks/useSearchTerm.tsx">
-        <metrics statements="7" coveredstatements="1" conditionals="2" coveredconditionals="0" methods="4" coveredmethods="0"/>
+        <metrics statements="7" coveredstatements="7" conditionals="2" coveredconditionals="2" methods="4" coveredmethods="4"/>
         <line num="3" count="1" type="stmt"/>
-        <line num="4" count="0" type="stmt"/>
-        <line num="5" count="0" type="cond" truecount="0" falsecount="2"/>
-        <line num="8" count="0" type="stmt"/>
-        <line num="9" count="0" type="stmt"/>
-        <line num="10" count="0" type="stmt"/>
-        <line num="14" count="0" type="stmt"/>
+        <line num="4" count="3" type="stmt"/>
+        <line num="5" count="2" type="cond" truecount="2" falsecount="0"/>
+        <line num="8" count="3" type="stmt"/>
+        <line num="9" count="3" type="stmt"/>
+        <line num="10" count="3" type="stmt"/>
+        <line num="14" count="3" type="stmt"/>
       </file>
       <file name="useTheme.tsx" path="/Users/maximozaitsev/Code/git repositories/react-project/src/hooks/useTheme.tsx">
         <metrics statements="5" coveredstatements="1" conditionals="2" coveredconditionals="0" methods="1" coveredmethods="0"/>
@@ -104,12 +115,12 @@
       <metrics statements="6" coveredstatements="3" conditionals="0" coveredconditionals="0" methods="5" coveredmethods="1"/>
       <file name="pokemonApi.ts" path="/Users/maximozaitsev/Code/git repositories/react-project/src/services/pokemonApi.ts">
         <metrics statements="6" coveredstatements="3" conditionals="0" coveredconditionals="0" methods="5" coveredmethods="1"/>
-        <line num="4" count="2" type="stmt"/>
-        <line num="7" count="2" type="stmt"/>
+        <line num="4" count="1" type="stmt"/>
+        <line num="7" count="1" type="stmt"/>
         <line num="9" count="0" type="stmt"/>
         <line num="11" count="0" type="stmt"/>
         <line num="14" count="0" type="stmt"/>
-        <line num="20" count="2" type="stmt"/>
+        <line num="20" count="1" type="stmt"/>
       </file>
     </package>
     <package name="store.reducers">

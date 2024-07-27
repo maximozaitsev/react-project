@@ -1,11 +1,12 @@
 // src/__tests__/Home.test.tsx
+import React from 'react';
 
 import { render, screen, fireEvent, waitFor } from '@testing-library/react';
 import { MemoryRouter, Route, Routes } from 'react-router-dom';
 import Home from '../components/Home';
 
 // Mocking components with correct paths
-jest.mock('../Search', () => ({
+jest.mock('../components/Search/Search', () => ({
   __esModule: true,
   default: ({ onSearch }: { onSearch: (term: string) => void }) => (
     <input
@@ -16,7 +17,7 @@ jest.mock('../Search', () => ({
   ),
 }));
 
-jest.mock('../PokemonList', () => ({
+jest.mock('../components/PokemonList/PokemonList', () => ({
   __esModule: true,
   default: ({
     searchTerm,
@@ -32,7 +33,7 @@ jest.mock('../PokemonList', () => ({
   ),
 }));
 
-jest.mock('../components/Pagination', () => ({
+jest.mock('../components/Pagination/Pagination', () => ({
   __esModule: true,
   default: ({ currentPage }: { currentPage: number }) => (
     <div>Page: {currentPage}</div>
@@ -52,7 +53,7 @@ jest.mock('../components/PokemonDetails', () => ({
 describe('Home Component', () => {
   test('renders Home component', () => {
     render(
-      <MemoryRouter initialEntries={['/']}>
+      <MemoryRouter initialEntries={['/']} initialIndex={0}>
         <Routes>
           <Route path="/" element={<Home />} />
         </Routes>
@@ -65,7 +66,7 @@ describe('Home Component', () => {
 
   test('updates search term', () => {
     render(
-      <MemoryRouter initialEntries={['/']}>
+      <MemoryRouter initialEntries={['/']} initialIndex={0}>
         <Routes>
           <Route path="/" element={<Home />} />
         </Routes>
@@ -81,7 +82,7 @@ describe('Home Component', () => {
 
   test('selects a pokemon and shows details', async () => {
     render(
-      <MemoryRouter initialEntries={['/']}>
+      <MemoryRouter initialEntries={['/']} initialIndex={0}>
         <Routes>
           <Route path="/" element={<Home />} />
         </Routes>
@@ -97,7 +98,7 @@ describe('Home Component', () => {
 
   test('closes pokemon details', async () => {
     render(
-      <MemoryRouter initialEntries={['/']}>
+      <MemoryRouter initialEntries={['/']} initialIndex={0}>
         <Routes>
           <Route path="/" element={<Home />} />
         </Routes>
@@ -123,7 +124,7 @@ describe('Home Component', () => {
 
   test('updates URL when selecting a pokemon', async () => {
     render(
-      <MemoryRouter initialEntries={['/?page=1']}>
+      <MemoryRouter initialEntries={['/?page=1']} initialIndex={0}>
         <Routes>
           <Route path="/" element={<Home />} />
         </Routes>
@@ -139,7 +140,10 @@ describe('Home Component', () => {
 
   test('updates URL when closing pokemon details', async () => {
     render(
-      <MemoryRouter initialEntries={['/?page=1&details=pikachu']}>
+      <MemoryRouter
+        initialEntries={['/?page=1&details=pikachu']}
+        initialIndex={0}
+      >
         <Routes>
           <Route path="/" element={<Home />} />
         </Routes>
