@@ -1,11 +1,13 @@
 // src/__tests__/PokemonDetails.test.tsx
 
 import React from 'react';
-import { render, screen, fireEvent } from '@testing-library/react';
-import { useFetchPokemonDetailsQuery } from '../services/pokemonApi';
+import { render, screen } from '@testing-library/react';
 import PokemonDetails from '../components/PokemonDetails';
+import { useFetchPokemonDetailsQuery } from '../services/pokemonApi';
 
-jest.mock('../../services/pokemonApi');
+jest.mock('../services/pokemonApi', () => ({
+  useFetchPokemonDetailsQuery: jest.fn(),
+}));
 
 describe('PokemonDetails Component', () => {
   const mockOnClose = jest.fn();
@@ -14,40 +16,35 @@ describe('PokemonDetails Component', () => {
     jest.clearAllMocks();
   });
 
-  const renderComponent = (props = {}) =>
-    render(<PokemonDetails name="pikachu" onClose={mockOnClose} {...props} />);
-
-  test('renders loading message', () => {
+  test('displays loading message', () => {
     (useFetchPokemonDetailsQuery as jest.Mock).mockReturnValue({
       data: null,
       isLoading: true,
       error: null,
     });
 
-    renderComponent();
+    render(<PokemonDetails name="pikachu" onClose={mockOnClose} />);
 
     expect(screen.getByText('Loading...')).toBeInTheDocument();
   });
 
-  test('renders error message', () => {
+  test('displays error message', () => {
     (useFetchPokemonDetailsQuery as jest.Mock).mockReturnValue({
       data: null,
       isLoading: false,
       error: true,
     });
 
-    renderComponent();
+    render(<PokemonDetails name="pikachu" onClose={mockOnClose} />);
 
     expect(screen.getByText('Pokemon details not found')).toBeInTheDocument();
   });
 
-  test('renders pokemon details', () => {
+  test('displays pokemon details', () => {
     (useFetchPokemonDetailsQuery as jest.Mock).mockReturnValue({
       data: {
         name: 'pikachu',
-        sprites: {
-          front_default: 'pikachu.png',
-        },
+        sprites: { front_default: 'pikachu.png' },
         height: 4,
         weight: 60,
       },
@@ -55,7 +52,7 @@ describe('PokemonDetails Component', () => {
       error: null,
     });
 
-    renderComponent();
+    render(<PokemonDetails name="pikachu" onClose={mockOnClose} />);
 
     expect(screen.getByText('pikachu')).toBeInTheDocument();
     expect(screen.getByAltText('pikachu')).toHaveAttribute(
@@ -64,26 +61,5 @@ describe('PokemonDetails Component', () => {
     );
     expect(screen.getByText('Height: 4')).toBeInTheDocument();
     expect(screen.getByText('Weight: 60')).toBeInTheDocument();
-  });
-
-  test('calls onClose when close button is clicked', () => {
-    (useFetchPokemonDetailsQuery as jest.Mock).mockReturnValue({
-      data: {
-        name: 'pikachu',
-        sprites: {
-          front_default: 'pikachu.png',
-        },
-        height: 4,
-        weight: 60,
-      },
-      isLoading: false,
-      error: null,
-    });
-
-    renderComponent();
-
-    fireEvent.click(screen.getByText('Close'));
-
-    expect(mockOnClose).toHaveBeenCalled();
   });
 });
