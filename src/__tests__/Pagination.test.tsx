@@ -2,7 +2,7 @@ import React from 'react';
 import { render, screen, fireEvent, waitFor } from '@testing-library/react';
 import '@testing-library/jest-dom';
 import { MemoryRouter, Route, Routes, useNavigate } from 'react-router-dom';
-import Pagination from '../components/Pagination';
+import Pagination from '../components/Pagination/Pagination';
 
 // Mock useNavigate hook
 jest.mock('react-router-dom', () => ({

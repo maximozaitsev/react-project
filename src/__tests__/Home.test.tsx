@@ -1,71 +1,70 @@
+// src/__tests__/Home.test.tsx
 import React from 'react';
 import { render, screen, fireEvent, waitFor } from '@testing-library/react';
 import { MemoryRouter, Route, Routes } from 'react-router-dom';
-import Home from '../components//Home';
+import Home from '../components/Home';
 
-// Mocking components
-jest.mock(
-  '../Search',
-  () =>
-    ({ onSearch }: { onSearch: (term: string) => void }) => (
-      <input
-        type="text"
-        placeholder="Search Pokemon"
-        onChange={e => onSearch(e.target.value)}
-      />
-    )
-);
+jest.mock('../components/Search/Search', () => ({
+  __esModule: true,
+  default: ({ onSearch }: { onSearch: (term: string) => void }) => (
+    <input
+      type="text"
+      placeholder="Search Pokemon"
+      onChange={e => onSearch(e.target.value)}
+    />
+  ),
+}));
 
-jest.mock(
-  '../PokemonList',
-  () =>
-    ({
-      searchTerm,
-      onPokemonClick,
-    }: {
-      searchTerm: string;
-      onPokemonClick: (name: string) => void;
-    }) => (
-      <div data-testid="pokemon-list">
-        {searchTerm && <p>Results for: {searchTerm}</p>}
-        <button onClick={() => onPokemonClick('pikachu')}>Pikachu</button>
-      </div>
-    )
-);
+jest.mock('../components/PokemonList/PokemonList', () => ({
+  __esModule: true,
+  default: ({
+    searchTerm,
+    onPokemonClick,
+  }: {
+    searchTerm: string;
+    onPokemonClick: (name: string) => void;
+  }) => (
+    <div data-testid="pokemon-list">
+      {searchTerm && <p>Results for: {searchTerm}</p>}
+      <button onClick={() => onPokemonClick('pikachu')}>Pikachu</button>
+    </div>
+  ),
+}));
 
-jest.mock(
-  '../components/Pagination',
-  () =>
-    ({ currentPage }: { currentPage: number }) => <div>Page: {currentPage}</div>
-);
+jest.mock('../components/Pagination/Pagination', () => ({
+  __esModule: true,
+  default: ({ currentPage }: { currentPage: number }) => (
+    <div>Page: {currentPage}</div>
+  ),
+}));
 
-jest.mock(
-  '../components/PokemonDetails',
-  () =>
-    ({ name, onClose }: { name: string; onClose: () => void }) => (
-      <div data-testid="pokemon-details">
-        <h2>{name}</h2>
-        <button onClick={onClose}>Close</button>
-      </div>
-    )
-);
+jest.mock('../components/PokemonDetails', () => ({
+  __esModule: true,
+  default: ({ name, onClose }: { name: string; onClose: () => void }) => (
+    <div data-testid="pokemon-details">
+      <h2>{name}</h2>
+      <button onClick={onClose}>Close</button>
+    </div>
+  ),
+}));
 
 describe('Home Component', () => {
   test('renders Home component', () => {
     render(
-      <MemoryRouter initialEntries={['/']}>
+      <MemoryRouter initialEntries={['/']} initialIndex={0}>
         <Routes>
           <Route path="/" element={<Home />} />
         </Routes>
       </MemoryRouter>
     );
 
-    expect(screen.getByText('My Pokemon App')).toBeInTheDocument();
+    expect(screen.getByPlaceholderText('Search Pokemon')).toBeInTheDocument();
+    expect(screen.getByText('Page: 1')).toBeInTheDocument();
   });
 
   test('updates search term', () => {
     render(
-      <MemoryRouter initialEntries={['/']}>
+      <MemoryRouter initialEntries={['/']} initialIndex={0}>
         <Routes>
           <Route path="/" element={<Home />} />
         </Routes>
@@ -79,9 +78,9 @@ describe('Home Component', () => {
     expect(screen.getByText('Results for: pikachu')).toBeInTheDocument();
   });
 
-  test('selects a pokemon and shows details', () => {
+  test('selects a pokemon and shows details', async () => {
     render(
-      <MemoryRouter initialEntries={['/']}>
+      <MemoryRouter initialEntries={['/']} initialIndex={0}>
         <Routes>
           <Route path="/" element={<Home />} />
         </Routes>
@@ -90,12 +89,14 @@ describe('Home Component', () => {
 
     fireEvent.click(screen.getByText('Pikachu'));
 
-    expect(screen.getByTestId('pokemon-details')).toBeInTheDocument();
+    await waitFor(() =>
+      expect(screen.getByTestId('pokemon-details')).toBeInTheDocument()
+    );
   });
 
   test('closes pokemon details', async () => {
     render(
-      <MemoryRouter initialEntries={['/']}>
+      <MemoryRouter initialEntries={['/']} initialIndex={0}>
         <Routes>
           <Route path="/" element={<Home />} />
         </Routes>
@@ -106,7 +107,9 @@ describe('Home Component', () => {
     fireEvent.click(screen.getByText('Pikachu'));
 
     // Ensure that the details are shown
-    expect(screen.getByTestId('pokemon-details')).toBeInTheDocument();
+    await waitFor(() =>
+      expect(screen.getByTestId('pokemon-details')).toBeInTheDocument()
+    );
 
     // Now close the details
     fireEvent.click(screen.getByText('Close'));

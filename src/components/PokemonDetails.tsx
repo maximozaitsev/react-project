@@ -1,47 +1,19 @@
-import React, { useEffect, useState } from 'react';
-import axios from 'axios';
+import React from 'react';
+import { useFetchPokemonDetailsQuery } from '../services/pokemonApi';
 
 interface PokemonDetailsProps {
   name: string;
   onClose: () => void;
 }
 
-interface Pokemon {
-  name: string;
-  height: number;
-  weight: number;
-  sprites: {
-    front_default: string;
-  };
-}
-
 const PokemonDetails: React.FC<PokemonDetailsProps> = ({ name, onClose }) => {
-  const [pokemon, setPokemon] = useState<Pokemon | null>(null);
-  const [loading, setLoading] = useState<boolean>(true);
+  const { data: pokemon, error, isLoading } = useFetchPokemonDetailsQuery(name);
 
-  useEffect(() => {
-    const fetchPokemonDetails = async () => {
-      setLoading(true);
-      try {
-        const response = await axios.get(
-          `https://pokeapi.co/api/v2/pokemon/${name}`
-        );
-        setPokemon(response.data);
-      } catch (error) {
-        console.error(error);
-      } finally {
-        setLoading(false);
-      }
-    };
-
-    fetchPokemonDetails();
-  }, [name]);
-
-  if (loading) {
+  if (isLoading) {
     return <p>Loading...</p>;
   }
 
-  if (!pokemon) {
+  if (error || !pokemon) {
     return <p>Pokemon details not found</p>;
   }
 
