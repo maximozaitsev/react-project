@@ -1,11 +1,11 @@
 import React from 'react';
 import ThemeSelector from '../ThemeSelector/ThemeSelector';
-import './Header.css';
+import styles from './Header.module.css';
 
 const Header: React.FC = () => {
   return (
-    <header>
-      <h1>My Pokemon App</h1>
+    <header className={styles.header}>
+      <h1 className={styles.h1}>My Pokemon App</h1>
       <ThemeSelector />
     </header>
   );

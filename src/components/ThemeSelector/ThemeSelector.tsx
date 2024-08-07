@@ -1,6 +1,6 @@
 import React from 'react';
 import useTheme from '../../hooks/useTheme';
-import './ThemeSelector.css';
+import styles from './ThemeSelector.module.css';
 
 const ThemeSelector: React.FC = () => {
   const { theme, setTheme } = useTheme();
@@ -10,7 +10,10 @@ const ThemeSelector: React.FC = () => {
   };
 
   return (
-    <button className={`theme-selector ${theme}`} onClick={handleClick}>
+    <button
+      className={`${styles.themeSelector} ${styles[theme]}`}
+      onClick={handleClick}
+    >
       {theme === 'light' ? 'Dark' : 'Light'}
     </button>
   );

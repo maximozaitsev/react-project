@@ -1,5 +1,5 @@
-import React, { useState } from 'react';
-import { useLocation, useNavigate } from 'react-router-dom';
+import React, { useState, useEffect } from 'react';
+import { useRouter } from 'next/router';
 import Search from './Search/Search';
 import PokemonList from './PokemonList/PokemonList';
 import Pagination from './Pagination/Pagination';
@@ -8,11 +8,18 @@ import PokemonDetails from '../components/PokemonDetails';
 const Home: React.FC = () => {
   const [searchTerm, setSearchTerm] = useState<string>('');
   const [selectedPokemon, setSelectedPokemon] = useState<string | null>(null);
-  const location = useLocation();
-  const navigate = useNavigate();
+  const router = useRouter();
+  const { query } = router;
 
-  const params = new URLSearchParams(location.search);
-  const currentPage = parseInt(params.get('page') || '1', 10);
+  const currentPage = parseInt((query.page as string) || '1', 10);
+
+  useEffect(() => {
+    if (query.details) {
+      setSelectedPokemon(query.details as string);
+    } else {
+      setSelectedPokemon(null);
+    }
+  }, [query.details]);
 
   const handleSearch = (term: string) => {
     setSearchTerm(term);
@@ -20,14 +27,20 @@ const Home: React.FC = () => {
 
   const handlePokemonClick = (name: string) => {
     setSelectedPokemon(name);
-    params.set('details', name);
-    navigate({ search: params.toString() });
+    router.push({
+      pathname: router.pathname,
+      query: { ...query, details: name },
+    });
   };
 
   const handleCloseDetails = () => {
     setSelectedPokemon(null);
-    params.delete('details');
-    navigate({ search: params.toString() });
+    const newQuery = { ...query };
+    delete newQuery.details;
+    router.push({
+      pathname: router.pathname,
+      query: newQuery,
+    });
   };
 
   return (

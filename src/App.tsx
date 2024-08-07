@@ -1,12 +1,8 @@
 import React from 'react';
-import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 import { useSelector } from 'react-redux';
-import Home from './components/Home';
-import NotFound from './components/NotFound/NotFound';
 import Flyout from './components/Flyout/Flyout';
 import { RootState } from './store/store';
 import useTheme from './hooks/useTheme';
-import Header from './components/Header/Header';
 
 const App: React.FC = () => {
   const selectedPokemon = useSelector(
@@ -27,14 +23,7 @@ const App: React.FC = () => {
 
   return (
     <div className={`app ${theme}`}>
-      <Router>
-        <Header />
-        <Routes>
-          <Route path="/main" element={<Home />} />
-          <Route path="*" element={<NotFound />} />
-        </Routes>
-        {selectedPokemon.length > 0 && <Flyout onDownload={handleDownload} />}
-      </Router>
+      {selectedPokemon.length > 0 && <Flyout onDownload={handleDownload} />}
     </div>
   );
 };
