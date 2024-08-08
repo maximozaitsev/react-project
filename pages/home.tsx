@@ -1,9 +1,9 @@
 import React, { useState, useEffect } from 'react';
 import { useRouter } from 'next/router';
-import Search from './Search/Search';
-import PokemonList from './PokemonList/PokemonList';
-import Pagination from './Pagination/Pagination';
-import PokemonDetails from '../components/PokemonDetails';
+import Search from '../src/components/Search/Search';
+import PokemonList from '../src/components/PokemonList/PokemonList';
+import Pagination from '../src/components/Pagination/Pagination';
+import PokemonDetails from '../src/components/PokemonDetails';
 
 const Home: React.FC = () => {
   const [searchTerm, setSearchTerm] = useState<string>('');
