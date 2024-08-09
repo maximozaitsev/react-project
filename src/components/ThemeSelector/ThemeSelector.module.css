@@ -1,4 +1,4 @@
-.theme-selector {
+.themeSelector {
   padding: 10px 20px;
   border: none;
   border-radius: 5px;
@@ -10,16 +10,16 @@
   margin: auto 20px;
 }
 
-.theme-selector.light {
+.themeSelector.light {
   background-color: #f0f0f0;
   color: #000000;
 }
 
-.theme-selector.dark {
+.themeSelector.dark {
   background-color: #333333;
   color: #ffffff;
 }
 
-.theme-selector:hover {
+.themeSelector:hover {
   opacity: 0.8;
 }

@@ -1,6 +1,8 @@
+'use client';
+
 import React from 'react';
-import { useNavigate, useLocation } from 'react-router-dom';
-import './Pagination.css';
+import { useSearchParams, useRouter } from 'next/navigation';
+import styles from './Pagination.module.css';
 
 interface PaginationProps {
   currentPage: number;
@@ -8,17 +10,17 @@ interface PaginationProps {
 }
 
 const Pagination: React.FC<PaginationProps> = ({ currentPage, totalPages }) => {
-  const navigate = useNavigate();
-  const location = useLocation();
+  const router = useRouter();
+  const searchParams = useSearchParams();
+  const query = new URLSearchParams(searchParams.toString());
 
   const goToPage = (page: number) => {
-    const params = new URLSearchParams(location.search);
-    params.set('page', page.toString());
-    navigate({ search: params.toString() });
+    query.set('page', page.toString());
+    router.push(`?${query.toString()}`);
   };
 
   return (
-    <div className="pagination">
+    <div className={styles.pagination}>
       <button
         disabled={currentPage === 1}
         onClick={() => goToPage(currentPage - 1)}

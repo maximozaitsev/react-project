@@ -4,7 +4,7 @@ import { RootState, AppDispatch } from '../../store/store';
 import { toggleSelectPokemon } from '../../store/reducers/selectedPokemonSlice';
 import { useFetchPokemonListQuery } from '../../services/pokemonApi';
 import useTheme from '../../hooks/useTheme';
-import './PokemonList.css';
+import styles from './PokemonList.module.css';
 
 interface PokemonListProps {
   searchTerm: string;
@@ -52,11 +52,11 @@ const PokemonList: React.FC<PokemonListProps> = ({
   }
 
   return (
-    <div className={`pokemon-list ${theme}`}>
+    <div className={`${styles.pokemonList} ${styles[theme]}`}>
       {filteredPokemonList.map((pokemon: string) => (
         <div
           key={pokemon}
-          className={`pokemon-item ${theme}`}
+          className={`${styles.pokemonItem} ${styles[theme]}`}
           onClick={() => onPokemonClick(pokemon)}
         >
           <input
