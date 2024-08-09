@@ -1,25 +1,28 @@
+'use client';
+
 import React, { useState, useEffect } from 'react';
-import { useRouter } from 'next/router';
-import Search from './Search/Search';
-import PokemonList from './PokemonList/PokemonList';
-import Pagination from './Pagination/Pagination';
-import PokemonDetails from '../components/PokemonDetails';
+import { useSearchParams, usePathname, useRouter } from 'next/navigation';
+import Search from '../../src/components/Search/Search';
+import PokemonList from '../../src/components/PokemonList/PokemonList';
+import Pagination from '../../src/components/Pagination/Pagination';
+import PokemonDetails from '../../src/components/PokemonDetails';
 
 const Home: React.FC = () => {
   const [searchTerm, setSearchTerm] = useState<string>('');
   const [selectedPokemon, setSelectedPokemon] = useState<string | null>(null);
   const router = useRouter();
-  const { query } = router;
+  const searchParams = useSearchParams();
+  const pathname = usePathname();
 
-  const currentPage = parseInt((query.page as string) || '1', 10);
+  const currentPage = parseInt(searchParams.get('page') || '1', 10);
 
   useEffect(() => {
-    if (query.details) {
-      setSelectedPokemon(query.details as string);
+    if (searchParams.get('details')) {
+      setSelectedPokemon(searchParams.get('details') as string);
     } else {
       setSelectedPokemon(null);
     }
-  }, [query.details]);
+  }, [searchParams]);
 
   const handleSearch = (term: string) => {
     setSearchTerm(term);
@@ -27,20 +30,16 @@ const Home: React.FC = () => {
 
   const handlePokemonClick = (name: string) => {
     setSelectedPokemon(name);
-    router.push({
-      pathname: router.pathname,
-      query: { ...query, details: name },
-    });
+    const newParams = new URLSearchParams(searchParams);
+    newParams.set('details', name);
+    router.push(`${pathname}?${newParams.toString()}`);
   };
 
   const handleCloseDetails = () => {
     setSelectedPokemon(null);
-    const newQuery = { ...query };
-    delete newQuery.details;
-    router.push({
-      pathname: router.pathname,
-      query: newQuery,
-    });
+    const newParams = new URLSearchParams(searchParams);
+    newParams.delete('details');
+    router.push(`${pathname}?${newParams.toString()}`);
   };
 
   return (

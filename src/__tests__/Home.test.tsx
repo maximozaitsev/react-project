@@ -2,7 +2,7 @@
 import React from 'react';
 import { render, screen, fireEvent, waitFor } from '@testing-library/react';
 import { MemoryRouter, Route, Routes } from 'react-router-dom';
-import Home from '../components/Home';
+import Home from '../../app/home/page';
 
 jest.mock('../components/Search/Search', () => ({
   __esModule: true,

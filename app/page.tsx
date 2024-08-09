@@ -1,7 +1,9 @@
-// pages/index.tsx
+// app/page.tsx
+'use client';
+
 import React from 'react';
 import { useSelector } from 'react-redux';
-import Home from '../src/components/Home';
+import Home from './home/page';
 import Header from '../src/components/Header/Header';
 import Flyout from '../src/components/Flyout/Flyout';
 import { RootState } from '../src/store/store';
