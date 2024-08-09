@@ -1,14 +1,17 @@
 import { useState, useEffect } from 'react';
 
 const useSearchTerm = () => {
-  const [term, setTerm] = useState<string>(() => {
-    return localStorage.getItem('searchTerm') || '';
-  });
+  const [term, setTerm] = useState<string>('');
 
   useEffect(() => {
-    return () => {
-      localStorage.setItem('searchTerm', term);
-    };
+    const savedTerm = localStorage.getItem('searchTerm');
+    if (savedTerm) {
+      setTerm(savedTerm);
+    }
+  }, []);
+
+  useEffect(() => {
+    localStorage.setItem('searchTerm', term);
   }, [term]);
 
   return [term, setTerm] as const;

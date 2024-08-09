@@ -1,6 +1,6 @@
 import React from 'react';
 import useSearchTerm from '../../hooks/useSearchTerm';
-import './Search.css';
+import styles from './Search.module.css';
 
 interface SearchProps {
   onSearch: (term: string) => void;
@@ -20,7 +20,7 @@ const Search: React.FC<SearchProps> = ({ onSearch }) => {
   };
 
   return (
-    <div className="search">
+    <div className={styles.search}>
       <input
         type="text"
         value={term}

@@ -1,5 +1,5 @@
 import React from 'react';
-import './Flyout.css';
+import styles from './Flyout.module.css';
 import { useDispatch, useSelector } from 'react-redux';
 import { RootState } from '../../store/store';
 import { clearSelectedPokemon } from '../../store/reducers/selectedPokemonSlice';
@@ -21,7 +21,7 @@ const Flyout: React.FC<FlyoutProps> = ({ onDownload }) => {
   };
 
   return (
-    <div className={`flyout ${theme}`}>
+    <div className={`${styles.flyout} ${styles[theme]}`}>
       <p>{selectedPokemon.length} item(s) are selected</p>
       <button onClick={handleUnselectAll}>Unselect all</button>
       <button onClick={onDownload}>Download</button>
