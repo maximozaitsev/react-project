@@ -1,0 +1,28 @@
+.flyout {
+  position: fixed;
+  bottom: 0;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  padding: 10px;
+  box-shadow: 0 -2px 5px rgba(0, 0, 0, 0.1);
+  transition:
+    background-color 0.3s,
+    color 0.3s;
+}
+
+.flyout.light {
+  background-color: #ffffff;
+  color: #000000;
+  border-top: 1px solid #ccc;
+}
+
+.flyout.dark {
+  background-color: #333333;
+  color: #ffffff;
+  border-top: 1px solid #444444;
+}
+
+.flyout button {
+  margin-left: 10px;
+}

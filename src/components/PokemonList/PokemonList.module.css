@@ -1,0 +1,20 @@
+.pokemonList {
+  padding-bottom: 10px;
+}
+
+.pokemonList div {
+  text-align: left;
+  cursor: pointer;
+}
+
+.pokemonList.light div:hover {
+  background: gainsboro;
+}
+
+.pokemonList.dark div:hover {
+  background: rgb(57, 57, 57);
+}
+
+.pokemonItem input {
+  margin-right: 1rem;
+}
