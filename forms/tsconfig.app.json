@@ -6,13 +6,16 @@
     "module": "ESNext",
     "skipLibCheck": true,
 
-    /* Bundler mode */
-    "moduleResolution": "bundler",
+    /* Updated Module Resolution */
+    "moduleResolution": "node",
     "allowImportingTsExtensions": true,
     "isolatedModules": true,
     "moduleDetection": "force",
     "noEmit": true,
     "jsx": "react-jsx",
+
+    /* Add this flag to resolve the import issue */
+    "allowSyntheticDefaultImports": true,
 
     /* Linting */
     "strict": true,
