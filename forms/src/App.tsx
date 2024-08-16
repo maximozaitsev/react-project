@@ -1,8 +1,8 @@
 import React from 'react'
 import { BrowserRouter as Router, Routes, Route, Link } from 'react-router-dom'
-import Main from './components/Main'
-import UncontrolledForm from './components/UncontrolledForm'
-import ReactHookForm from './components/ReactHookForm'
+import Main from './components/Main/Main'
+import UncontrolledForm from './components/UnconrtolledForm/UncontrolledForm'
+import ReactHookForm from './components/ControlledForm/ReactHookForm'
 import './App.css'
 
 const App: React.FC = () => {

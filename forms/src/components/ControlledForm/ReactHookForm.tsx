@@ -1,7 +1,7 @@
 import React from 'react'
 import { useForm } from 'react-hook-form'
 import { useDispatch } from 'react-redux'
-import { setReactHookFormData } from '../store/formSlice'
+import { setReactHookFormData } from '../../store/formSlice'
 import * as yup from 'yup'
 import { yupResolver } from '@hookform/resolvers/yup'
 
@@ -55,7 +55,7 @@ const ReactHookForm: React.FC = () => {
   }
 
   return (
-    <form onSubmit={handleSubmit(onSubmit)}>
+    <form className="form" onSubmit={handleSubmit(onSubmit)}>
       <label htmlFor="name">Name:</label>
       <input {...register('name')} type="text" id="name" />
       <p>{errors.name?.message}</p>

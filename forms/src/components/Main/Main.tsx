@@ -1,6 +1,7 @@
 import React from 'react'
 import { useSelector } from 'react-redux'
-import { RootState } from '../store/store'
+import { RootState } from '../../store/store'
+import './Main.css'
 
 const Main: React.FC = () => {
   const uncontrolledData = useSelector(
@@ -11,7 +12,7 @@ const Main: React.FC = () => {
   )
 
   return (
-    <div>
+    <div className="main">
       <h2>Form Data Overview</h2>
       <div>
         <h3>Uncontrolled Form Data</h3>

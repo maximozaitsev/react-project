@@ -1,6 +1,6 @@
 import React, { useRef } from 'react'
 import { useDispatch } from 'react-redux'
-import { setUncontrolledFormData } from '../store/formSlice'
+import { setUncontrolledFormData } from '../../store/formSlice'
 
 interface FormData {
   name: string
@@ -44,7 +44,7 @@ const UncontrolledForm: React.FC = () => {
   }
 
   return (
-    <form onSubmit={handleSubmit}>
+    <form className="form" onSubmit={handleSubmit}>
       <label htmlFor="name">Name:</label>
       <input ref={nameRef} type="text" id="name" name="name" />
 
