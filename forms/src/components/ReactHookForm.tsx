@@ -12,7 +12,7 @@ interface FormData {
   password: string
   gender: string
   termsAccepted: boolean
-  picture: File | null
+  picture: string
   country: string
 }
 
@@ -35,20 +35,7 @@ const schema = yup.object().shape({
     .boolean()
     .oneOf([true], 'You must accept the terms and conditions')
     .required(),
-  picture: yup
-    .mixed<File>()
-    .test(
-      'fileSize',
-      'File size is too large',
-      (value) => !value || (value && value.size <= 1048576),
-    )
-    .test(
-      'fileFormat',
-      'Unsupported Format',
-      (value) =>
-        !value || (value && ['image/jpeg', 'image/png'].includes(value.type)),
-    )
-    .required(),
+  picture: yup.string().required(),
   country: yup.string().required(),
 })
 
@@ -104,12 +91,7 @@ const ReactHookForm: React.FC = () => {
       <p>{errors.termsAccepted?.message}</p>
 
       <label htmlFor="picture">Upload Picture:</label>
-      <input
-        {...register('picture')}
-        type="file"
-        id="picture"
-        accept=".png, .jpg, .jpeg"
-      />
+      <input {...register('picture')} type="text" id="picture" />
       <p>{errors.picture?.message}</p>
 
       <label htmlFor="country">Country:</label>
